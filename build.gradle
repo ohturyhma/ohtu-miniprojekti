@@ -1,0 +1,24 @@
+plugins {
+  id 'com.github.johnrengelman.shadow' version '2.0.1'
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+	jcenter()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'readingtipslibrary.ReadingTipsLibrary'
+    }
+}
+
+dependencies {
+	testCompile 'junit:junit:4.12'
+	testCompile 'org.mockito:mockito-core:2.7.21'
+	compile 'org.xerial:sqlite-jdbc:3.25.2'
+}
+
+mainClassName = 'readingtipslibrary.ReadingTipsLibrary'
