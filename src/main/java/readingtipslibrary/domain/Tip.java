@@ -11,4 +11,5 @@ package readingtipslibrary.domain;
  */
 public interface Tip {
     
+    String getType();
 }
