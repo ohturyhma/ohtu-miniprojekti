@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class ReadingTipsApplication {
 
     private Connection connection;
-    
+
     public void init() {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:readingtips.db");

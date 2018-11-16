@@ -12,10 +12,10 @@ import java.util.ArrayList;
  * @author strajama
  */
 public class Video implements Tip {
-    
+
     private String title;
     private String url;
-    private ArrayList<String> courses;
+    private ArrayList<String> relatedCourses;
     private String type;
     private String comment;
 
@@ -28,9 +28,7 @@ public class Video implements Tip {
     public String getType() {
         return type;
     }
-    
-    
-    
+
 }
 /*
 
