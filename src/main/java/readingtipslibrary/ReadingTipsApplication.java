@@ -28,8 +28,10 @@ public class ReadingTipsApplication {
     }
 
     public void run(String[] args) {
+		if (args == null || args.length == 0)
+			return;
         String action = args[0];
-
+		int[] test;
         switch (action) {
             case "find-all":
                 /* 
