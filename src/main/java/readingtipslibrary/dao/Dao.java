@@ -5,10 +5,16 @@
  */
 package readingtipslibrary.dao;
 
+import java.util.List;
+import readingtipslibrary.domain.Tip;
+
 /**
  *
  * @author strajama
  */
-public interface Dao {
+public interface Dao<T> {
+    
+    public List<Tip> findAll();
+    public void insert(T t);
     
 }
