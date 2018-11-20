@@ -8,7 +8,7 @@ package readingtipslibrary.domain;
 import java.util.ArrayList;
 
 /**
- *
+ * Class containing the data for a book
  * @author strajama
  */
 public class Book implements Tip {
@@ -20,7 +20,13 @@ public class Book implements Tip {
     private ArrayList<String> tags;
     private ArrayList<String> preliminaryCourses;
     private ArrayList<String> relatedCourses;
-
+    /**
+     * Constructor for a book
+     * @param author The author of the book
+     * @param title The title of the book
+     * @param isbn The ISBN-code for the book
+     * @param type The type of the book
+     */
     public Book(String author, String title, String isbn, String type) {
         this.isbn = isbn;
         this.author = author;
@@ -55,7 +61,8 @@ public class Book implements Tip {
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
-
+    
+    @Override
     public String toString() {
         return author + " " + title + " " + isbn + " " + type;
     }

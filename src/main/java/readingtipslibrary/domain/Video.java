@@ -8,7 +8,7 @@ package readingtipslibrary.domain;
 import java.util.ArrayList;
 
 /**
- *
+ * Class containing video for a podcast episode
  * @author strajama
  */
 public class Video implements Tip {
@@ -18,7 +18,12 @@ public class Video implements Tip {
     private ArrayList<String> relatedCourses;
     private String type;
     private String comment;
-
+    /**
+     * Constructor for a video
+     * @param title The title of the video
+     * @param url The URL at which the video is found
+     * @param type The type of the video
+     */
     public Video(String title, String url, String type) {
         this.title = title;
         this.url = url;

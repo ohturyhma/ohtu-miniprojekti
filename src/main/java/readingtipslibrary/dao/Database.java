@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Wrapper for the database
  * @author johyry
  */
 public class Database {
@@ -30,7 +30,6 @@ public class Database {
     
     /**
      * Initializes db by creating tables if nonexistent.
-     * 
      * 
      */
 
@@ -54,9 +53,8 @@ public class Database {
     
     /**
      * Createtables for initializing.
-     * 
+     * @return return the commands for creating the datatables
      */
-
     private List<String> createTables() {
         ArrayList<String> list = new ArrayList<>();
 

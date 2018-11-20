@@ -15,20 +15,31 @@ import readingtipslibrary.domain.Tip;
 import readingtipslibrary.domain.Video;
 
 /**
+ * Data Access Object for Videos
  *
  * @author nroope
  */
 public class VideoDao implements Dao<Video> {
 
     private Database database;
-
+     /**
+     * Constructor for the VideoDAO
+     *
+     * @param database The database which the DAO uses
+     *
+     */
     public VideoDao(Database database) {
         this.database = database;
     }
-
+    /**
+     * Creates a list of Video objects from the videos table in the database
+     *
+     * @return A list of all videos from the DAO's database
+     * @throws SQLException
+     */
     @Override
     public List<Tip> findAll() throws SQLException {
-        
+
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM videos");
 
@@ -49,7 +60,12 @@ public class VideoDao implements Dao<Video> {
         return videos;
 
     }
-
+    /**
+     * Adds a Video into the videos table in the database and returns it
+     * @param video The Video to be added into the database
+     * @return The video that was added to the table (Same as the parameter)
+     * @throws SQLException
+     */
     @Override
     public Video insert(Video video) throws SQLException {
         Connection connection = database.getConnection();

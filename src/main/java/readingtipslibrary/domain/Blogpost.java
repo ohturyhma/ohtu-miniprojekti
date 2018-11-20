@@ -8,7 +8,7 @@ package readingtipslibrary.domain;
 import java.util.ArrayList;
 
 /**
- *
+ * Class containing data for a blogpost
  * @author strajama
  */
 public class Blogpost implements Tip {
@@ -18,7 +18,13 @@ public class Blogpost implements Tip {
     private String url;
     private String type;
     private ArrayList<String> relatedCourses;
-
+    /**
+     * Constructor for a blogpost
+     * @param author The author of the blogpost
+     * @param title The title of the blogpost
+     * @param url The URL at which the blogpost is found
+     * @param type The type of the blogpost
+     */
     public Blogpost(String author, String title, String url, String type) {
         this.author = author;
         this.title = title;
@@ -54,6 +60,7 @@ public class Blogpost implements Tip {
         this.url = url;
     }
     
+    @Override
     public String toString() {
         return author + " " + title + " " + url + " " + type;
     }

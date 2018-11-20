@@ -8,7 +8,7 @@ package readingtipslibrary.domain;
 import java.util.ArrayList;
 
 /**
- *
+ * Class containing data for a podcast episode
  * @author strajama
  */
 public class Podcast implements Tip {
@@ -20,7 +20,13 @@ public class Podcast implements Tip {
     private String type;
     private ArrayList<String> tags;
     private ArrayList<String> relatedCourses;
-
+    /**
+     * Constructor for a podcast
+     * @param podcastName Name of the podcast
+     * @param title The title of the episode of the podcast
+     * @param description description of the podcast
+     * @param type The type of the podcast
+     */
     public Podcast(String podcastName, String title, String description, String type) {
         this.podcastName = podcastName;
         this.title = title;
@@ -63,7 +69,8 @@ public class Podcast implements Tip {
     public void setDescription(String description) {
         this.description = description;
     }
-
+    
+    @Override
     public String toString() {
         return author + " " + podcastName + " " + description + " " + type;
     }

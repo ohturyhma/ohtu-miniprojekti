@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import readingtipslibrary.domain.Book;
 import readingtipslibrary.domain.Tip;
-import readingtipslibrary.domain.Video;
 
 /**
+ * Data Access Object for Books
  *
  * @author nroope
  */
@@ -23,10 +23,22 @@ public class BookDao implements Dao<Book> {
 
     private Database database;
 
+    /**
+     * Constructor for the BookDAO
+     *
+     * @param database The database which the DAO uses
+     *
+     */
     public BookDao(Database database) {
         this.database = database;
     }
 
+    /**
+     * Creates a list of Book objects from the books table in the database
+     *
+     * @return A list of all books from the DAO's database
+     * @throws SQLException
+     */
     @Override
     public List<Tip> findAll() throws SQLException {
 
@@ -51,6 +63,13 @@ public class BookDao implements Dao<Book> {
         return books;
     }
 
+    /**
+     * Adds a Book into the books table in the database and returns it
+     *
+     * @param book The Book to be added into the database
+     * @return The book that was added to the table (Same as the parameter)
+     * @throws SQLException
+     */
     @Override
     public Tip insert(Book book) throws SQLException {
         Connection connection = database.getConnection();
