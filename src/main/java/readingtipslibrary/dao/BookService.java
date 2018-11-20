@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import readingtipslibrary.dao.BookDao;
 import readingtipslibrary.dao.Database;
-import readingtipslibrary.dao.VideoDao;
 import readingtipslibrary.domain.Book;
 import readingtipslibrary.domain.Tip;
 
