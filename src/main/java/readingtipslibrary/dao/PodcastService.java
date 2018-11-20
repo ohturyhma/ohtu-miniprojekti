@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package readingtipslibrary.domain;
+package readingtipslibrary.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 import readingtipslibrary.dao.Database;
 import readingtipslibrary.dao.PodcastDao;
+import readingtipslibrary.domain.Podcast;
+import readingtipslibrary.domain.Tip;
 
 /**
  *
@@ -23,8 +25,8 @@ public class PodcastService {
     }
     
     
-    public boolean insertPodcast(String author, String title, String description, String type) {
-        Podcast podcast = new Podcast(author, title, description, type);
+    public boolean insertPodcast(String podcastName, String title, String description, String type) {
+        Podcast podcast = new Podcast(podcastName, title, description, type);
 
         try {
             podcastDao.insert(podcast);

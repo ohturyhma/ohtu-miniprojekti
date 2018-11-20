@@ -62,7 +62,7 @@ public class Blogpost implements Tip {
     
     @Override
     public String toString() {
-        return author + " " + title + " " + url + " " + type;
+        return author + ", " + title + ", " + url + ", " + type;
     }
 
 }

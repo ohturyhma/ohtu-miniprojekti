@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package readingtipslibrary.domain;
+package readingtipslibrary.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import readingtipslibrary.dao.BlogDao;
-import readingtipslibrary.dao.Database;
+import readingtipslibrary.domain.Blogpost;
+import readingtipslibrary.domain.Tip;
 
 /**
  *
@@ -20,8 +20,7 @@ public class BlogService {
     public BlogService(Database database) {
         blogDao = new BlogDao(database);
     }
-    
-    
+        
     public boolean insertBlog(String author, String title, String url, String type) {
         Blogpost blogpost = new Blogpost(author, title, url, type);
 

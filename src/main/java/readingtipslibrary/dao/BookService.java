@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package readingtipslibrary.domain;
+package readingtipslibrary.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 import readingtipslibrary.dao.BookDao;
 import readingtipslibrary.dao.Database;
+import readingtipslibrary.dao.VideoDao;
+import readingtipslibrary.domain.Book;
+import readingtipslibrary.domain.Tip;
 
 /**
  *
@@ -22,8 +25,8 @@ public class BookService {
         this.bookDao = new BookDao(database);
     }
 
-    public boolean insertBook(String author, String title, String url, String type) {
-        Book book = new Book(author, title, url, type);
+    public boolean insertBook(String author, String title, String isbn, String type) {
+        Book book = new Book(author, title, isbn, type);
 
         try {
             bookDao.insert(book);

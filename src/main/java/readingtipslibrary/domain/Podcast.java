@@ -72,7 +72,7 @@ public class Podcast implements Tip {
     
     @Override
     public String toString() {
-        return author + " " + podcastName + " " + description + " " + type;
+        return podcastName + ", " + title + ", " + description + ", " + type;
     }
 }
 /*

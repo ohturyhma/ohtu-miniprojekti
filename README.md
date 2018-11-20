@@ -17,4 +17,4 @@ Definition of done user storylle:
 * integrointi
   - varmistetaan, että toteutus toimii kaiken muun kanssa yhdessä
 * dokumentointi
-  - tehdään javadocsit luokille ja metodeille gettereitä ja settereitä lukuunottamatta
+  - tehdään javadocsit luokille ja tärkeimmille metodeille

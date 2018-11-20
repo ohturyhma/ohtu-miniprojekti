@@ -47,11 +47,11 @@ public class PodcastDao implements Dao<Podcast> {
 
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
-            String author = rs.getString("author");
+            String name = rs.getString("name");
             String title = rs.getString("title");
             String description = rs.getString("description");
             String type = rs.getString("type");
-            podcasts.add(new Podcast(author, title, description, type));
+            podcasts.add(new Podcast(name, title, description, type));
         }
 
         rs.close();
@@ -71,8 +71,8 @@ public class PodcastDao implements Dao<Podcast> {
     public Podcast insert(Podcast podcast) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO podcasts"
-                + " (author, title, description, type) VALUES (?, ?, ?, ?)");
-        stmt.setObject(1, podcast.getAuthor());
+                + " (name, title, description, type) VALUES (?, ?, ?, ?)");
+        stmt.setObject(1, podcast.getPodcastName());
         stmt.setObject(2, podcast.getTitle());
         stmt.setObject(3, podcast.getDescription());
         stmt.setObject(4, podcast.getType());

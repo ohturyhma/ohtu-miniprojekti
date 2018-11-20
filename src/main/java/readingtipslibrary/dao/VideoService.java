@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package readingtipslibrary.domain;
+package readingtipslibrary.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 import readingtipslibrary.dao.Database;
 import readingtipslibrary.dao.VideoDao;
+import readingtipslibrary.domain.Tip;
+import readingtipslibrary.domain.Video;
 
 /**
  *
@@ -22,7 +24,7 @@ public class VideoService {
         this.videoDao = new VideoDao(database);
     }
 
-    public boolean insertVideo(String url, String title, String type) {
+    public boolean insertVideo(String title, String url, String type) {
         Video video = new Video(title, url, type);
 
         try {

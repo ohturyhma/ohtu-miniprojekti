@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import readingtipslibrary.dao.Database;
-import readingtipslibrary.domain.BlogService;
-import readingtipslibrary.domain.BookService;
-import readingtipslibrary.domain.PodcastService;
+import readingtipslibrary.dao.BlogService;
+import readingtipslibrary.dao.BookService;
+import readingtipslibrary.dao.PodcastService;
 import readingtipslibrary.domain.Tip;
-import readingtipslibrary.domain.VideoService;
+import readingtipslibrary.dao.VideoService;
 
 /**
  *
@@ -39,8 +39,10 @@ public class ReadingTipsApplication {
     }
 
     public void run() throws Exception {
-
-        while (true) {
+        
+        boolean quit = false;
+        
+        while (!quit) {
 
             System.out.println("Commands: insert, find-all, quit");
             System.out.print("Enter command: ");
@@ -69,10 +71,8 @@ public class ReadingTipsApplication {
                         String title = input.nextLine();
                         System.out.println("isbn: ?");
                         String isbn = input.nextLine();
-                        System.out.println("type: ?");
-                        String tyyppi = input.nextLine();
 
-                        if (bookService.insertBook(author, title, isbn, tyyppi)) {
+                        if (bookService.insertBook(author, title, isbn, "book")) {
                             System.out.println("Inserting a book succeeded.");
                         } else {
                             System.out.println("Inserting a book not successfull");
@@ -83,26 +83,22 @@ public class ReadingTipsApplication {
                         String title = input.nextLine();
                         System.out.println("url: ?");
                         String url = input.nextLine();
-                        System.out.println("type: ?");
-                        String tyyppi = input.nextLine();
 
-                        if (videoService.insertVideo(title, url, tyyppi)) {
+                        if (videoService.insertVideo(title, url, "video")) {
                             System.out.println("Inserting a video succeeded.");
                         } else {
                             System.out.println("Inserting a video not successfull");
                         }
 
                     } else if (type.equals("podcast")) {
-                        System.out.println("Author: ?");
-                        String author = input.nextLine();
+                        System.out.println("Podcasts name: ?");
+                        String name = input.nextLine();
                         System.out.println("Title: ?");
                         String title = input.nextLine();
                         System.out.println("description: ?");
                         String description = input.nextLine();
-                        System.out.println("type: ?");
-                        String tyyppi = input.nextLine();
 
-                        if (podcastService.insertPodcast(author, title, description, tyyppi)) {
+                        if (podcastService.insertPodcast(name, title, description, "podcast")) {
                             System.out.println("Inserting a podcast succeeded.");
                         } else {
                             System.out.println("Inserting a podcast not successfull");
@@ -115,10 +111,8 @@ public class ReadingTipsApplication {
                         String title = input.nextLine();
                         System.out.println("url: ?");
                         String url = input.nextLine();
-                        System.out.println("type: ?");
-                        String tyyppi = input.nextLine();
 
-                        if (blogService.insertBlog(author, title, url, tyyppi)) {
+                        if (blogService.insertBlog(author, title, url, "blogpost")) {
                             System.out.println("Inserting a blog succeeded.");
                         } else {
                             System.out.println("Inserting a blog not successfull");
@@ -127,11 +121,12 @@ public class ReadingTipsApplication {
 
                     break;
                 case "quit":
+                    quit = true;
                     break;
                 default:
                     System.out.println("Enter a proper command (insert, find-all, quit)");
             }
-            break;
+            
         }
     }
 }
