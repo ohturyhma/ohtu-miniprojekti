@@ -141,6 +141,7 @@ public class ReadingTipsApplication {
                 default:
                     System.out.println("Enter a proper command (insert, find-all, quit)");
             }
+            break;
         }
     }
 }
