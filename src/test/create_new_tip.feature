@@ -1,4 +1,4 @@
-Feature: A new user can create new tip
+Feature: A user can create new tip
 
   Scenario: tip creation is successful with video tip
     Given command new tip is selected

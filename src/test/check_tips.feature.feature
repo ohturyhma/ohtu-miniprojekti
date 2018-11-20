@@ -1,0 +1,6 @@
+Feature: A user can check tips
+
+  Scenario: all tips are shown as a list
+    Given command all tips is selected
+    When ...
+    Then ...
