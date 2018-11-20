@@ -5,24 +5,14 @@
  */
 package readingtipslibrary;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import readingtipslibrary.dao.BlogDao;
-import readingtipslibrary.dao.BookDao;
 import readingtipslibrary.dao.Database;
-import readingtipslibrary.dao.PodcastDao;
-import readingtipslibrary.dao.VideoDao;
 import readingtipslibrary.domain.BlogService;
 import readingtipslibrary.domain.BookService;
 import readingtipslibrary.domain.PodcastService;
 import readingtipslibrary.domain.Tip;
-import readingtipslibrary.domain.Video;
 import readingtipslibrary.domain.VideoService;
 
 /**
