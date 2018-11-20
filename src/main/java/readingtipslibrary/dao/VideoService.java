@@ -24,7 +24,7 @@ public class VideoService {
         this.videoDao = new VideoDao(database);
     }
 
-    public boolean insertVideo(String url, String title, String type) {
+    public boolean insertVideo(String title, String url, String type) {
         Video video = new Video(title, url, type);
 
         try {

@@ -25,8 +25,8 @@ public class BookService {
         this.bookDao = new BookDao(database);
     }
 
-    public boolean insertBook(String author, String title, String url, String type) {
-        Book book = new Book(author, title, url, type);
+    public boolean insertBook(String author, String title, String isbn, String type) {
+        Book book = new Book(author, title, isbn, type);
 
         try {
             bookDao.insert(book);

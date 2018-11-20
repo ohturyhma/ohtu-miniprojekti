@@ -20,8 +20,7 @@ public class BlogService {
     public BlogService(Database database) {
         blogDao = new BlogDao(database);
     }
-    
-    
+        
     public boolean insertBlog(String author, String title, String url, String type) {
         Blogpost blogpost = new Blogpost(author, title, url, type);
 

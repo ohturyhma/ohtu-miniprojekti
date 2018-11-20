@@ -25,8 +25,8 @@ public class PodcastService {
     }
     
     
-    public boolean insertPodcast(String author, String title, String description, String type) {
-        Podcast podcast = new Podcast(author, title, description, type);
+    public boolean insertPodcast(String podcastName, String title, String description, String type) {
+        Podcast podcast = new Podcast(podcastName, title, description, type);
 
         try {
             podcastDao.insert(podcast);
