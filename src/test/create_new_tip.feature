@@ -1,0 +1,6 @@
+Feature: A new user can create new tip
+
+  Scenario: creation is successful with video
+    Given command new tip is selected
+    When ...
+    Then ...
