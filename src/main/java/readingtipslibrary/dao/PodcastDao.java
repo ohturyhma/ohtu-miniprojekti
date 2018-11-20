@@ -5,9 +5,15 @@
  */
 package readingtipslibrary.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import readingtipslibrary.domain.Podcast;
 import readingtipslibrary.domain.Tip;
+import readingtipslibrary.domain.Video;
 
 /**
  *
@@ -15,14 +21,51 @@ import readingtipslibrary.domain.Tip;
  */
 public class PodcastDao implements Dao<Podcast>{
 
-    @Override
-    public List<Tip> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private Database database;
+
+    public PodcastDao(Database database) {
+        this.database = database;
     }
 
     @Override
-    public void insert(Podcast t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Tip> findAll() throws SQLException {
+        
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM podcasts");
+
+        List<Tip> podcasts = new ArrayList<>();
+
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            String author = rs.getString("author");
+            String title = rs.getString("title");
+            String description = rs.getString("description");
+            String type = rs.getString("type");
+            podcasts.add(new Podcast(author, title, description, type));
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return podcasts;
+
     }
-    
+
+    @Override
+    public Podcast insert(Podcast podcast) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO podcasts"
+                + " (author, title, description, type) VALUES (?, ?, ?, ?)");
+        stmt.setObject(1, podcast.getAuthor());
+        stmt.setObject(2, podcast.getTitle());
+        stmt.setObject(3, podcast.getDescription());
+        stmt.setObject(4, podcast.getType());
+
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
+        return podcast;
+    }
+
 }

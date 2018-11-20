@@ -5,6 +5,7 @@
  */
 package readingtipslibrary.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 import readingtipslibrary.domain.Tip;
 
@@ -14,7 +15,7 @@ import readingtipslibrary.domain.Tip;
  */
 public interface Dao<T> {
     
-    public List<Tip> findAll();
-    public void insert(T t);
+    public List<Tip> findAll() throws SQLException;
+    public Tip insert(T t) throws SQLException;
     
 }

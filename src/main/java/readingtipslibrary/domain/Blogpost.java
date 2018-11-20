@@ -19,7 +19,8 @@ public class Blogpost implements Tip {
     private String type;
     private ArrayList<String> relatedCourses;
 
-    public Blogpost(String title, String url, String type) {
+    public Blogpost(String author, String title, String url, String type) {
+        this.author = author;
         this.title = title;
         this.url = url;
         this.type = type;
@@ -27,6 +28,34 @@ public class Blogpost implements Tip {
 
     public String getType() {
         return type;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+    
+    public String toString() {
+        return author + " " + title + " " + url + " " + type;
     }
 
 }
