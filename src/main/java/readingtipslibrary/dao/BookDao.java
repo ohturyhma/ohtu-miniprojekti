@@ -21,7 +21,7 @@ public class BookDao implements Dao<Book>{
     }
 
     @Override
-    public void insert(Book t) {
+    public Tip insert(Book t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

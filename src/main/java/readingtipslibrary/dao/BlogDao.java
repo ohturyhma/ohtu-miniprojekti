@@ -21,7 +21,7 @@ public class BlogDao implements Dao<Blogpost>{
     }
 
     @Override
-    public void insert(Blogpost t) {
+    public Tip insert(Blogpost t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

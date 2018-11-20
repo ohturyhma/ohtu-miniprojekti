@@ -15,9 +15,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import readingtipslibrary.dao.BlogDao;
 import readingtipslibrary.dao.BookDao;
+import readingtipslibrary.dao.Database;
 import readingtipslibrary.dao.PodcastDao;
 import readingtipslibrary.dao.VideoDao;
 import readingtipslibrary.domain.Tip;
+import readingtipslibrary.domain.Video;
+import readingtipslibrary.domain.VideoService;
 
 /**
  *
@@ -25,58 +28,47 @@ import readingtipslibrary.domain.Tip;
  */
 public class ReadingTipsApplication {
 
-    private Connection connection;
-    private VideoDao videoDao = new VideoDao();
-    private BookDao bookDao = new BookDao();
-    private BlogDao blogDao = new BlogDao();
-    private PodcastDao podcastDao = new PodcastDao();
+    private Scanner input;
+    private VideoService videoService;
+    private Database database;
 
-    public void init() {
+    public void init(Scanner scanner) throws ClassNotFoundException {
+        this.input = scanner;
+        Database database = new Database("jdbc:sqlite:readingtips.db");
+        database.init();
+        videoService = new VideoService(database);
+    }
+
+    public void run() throws Exception {
+
+        
+        // TÄÄ ON VAAN TESTI TOIMIIKO CONNECTION. VARSINAINEN CONNECTION TAPAHTUU DATABASE LUOKASSA
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:readingtips.db");
-            createTables();
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:readingtips.db");
 
         } catch (SQLException ex) {
             Logger.getLogger(ReadingTipsApplication.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    private void createTables() throws SQLException {
-        String createTableSql = "CREATE TABLE IF NOT EXISTS "
-                + "books(id INTEGER PRIMARY KEY AUTOINCREMENT, author varchar, title varchar, isbn varchar, type varchar)";
-        connection.createStatement().executeUpdate(createTableSql);
-
-        createTableSql = "CREATE TABLE IF NOT EXISTS "
-                + "videos(id INTEGER PRIMARY KEY AUTOINCREMENT, url varchar, title varchar, comment varchar, type varchar)";
-
-        connection.createStatement().executeUpdate(createTableSql);
-
-        createTableSql = "CREATE TABLE IF NOT EXISTS "
-                + "podcasts(id INTEGER PRIMARY KEY AUTOINCREMENT, author varchar, title varchar, description varchar, type varchar)";
-        connection.createStatement().executeUpdate(createTableSql);
-
-        createTableSql = "CREATE TABLE IF NOT EXISTS "
-                + "blogposts(id INTEGER PRIMARY KEY AUTOINCREMENT, author varchar, title varchar, url varchar, type varchar)";
-        connection.createStatement().executeUpdate(createTableSql);
-    }
-
-    public void run() {
-
-        Scanner input = new Scanner(System.in);
-        String command = "";
-        while (!command.equals("quit")) {
+        
+        
+        
+        while (true) {
+            
+            
+            
             System.out.println("Commands: insert, find-all, quit");
             System.out.print("Enter command: ");
-            command = input.nextLine();
+           
+            String command = input.nextLine();
 
             switch (command) {
                 case "find-all":
                     // method findAll has no implementation yet in any dao
                     List<Tip> allTypes = new ArrayList<>();
-                    allTypes.addAll(bookDao.findAll());
-                    allTypes.addAll(videoDao.findAll());
-                    allTypes.addAll(podcastDao.findAll());
-                    allTypes.addAll(blogDao.findAll());
+//                    allTypes.addAll(bookDao.findAll());
+                    allTypes.addAll(videoService.findAll());
+//                    allTypes.addAll(podcastDao.findAll());
+//                    allTypes.addAll(blogDao.findAll());
                     allTypes.stream().forEach(System.out::println);
                     break;
 
@@ -87,6 +79,18 @@ public class ReadingTipsApplication {
                     if (type.equals("book")) {
 
                     } else if (type.equals("video")) {
+                        System.out.println("Title: ?");
+                        String title = input.nextLine();
+                        System.out.println("url: ?");
+                        String url = input.nextLine();
+                        System.out.println("type: ?");
+                        String tyyppi = input.nextLine();
+
+                        if (videoService.insertVideo(title, url, tyyppi)) {
+                            System.out.println("Inserting a video succeeded.");
+                        } else {
+                            System.out.println("Inserting a video not successfull");
+                        }
 
                     } else if (type.equals("podcast")) {
 
