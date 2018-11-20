@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import readingtipslibrary.dao.Database;
-import readingtipslibrary.domain.BlogService;
-import readingtipslibrary.domain.BookService;
-import readingtipslibrary.domain.PodcastService;
+import readingtipslibrary.dao.BlogService;
+import readingtipslibrary.dao.BookService;
+import readingtipslibrary.dao.PodcastService;
 import readingtipslibrary.domain.Tip;
-import readingtipslibrary.domain.VideoService;
+import readingtipslibrary.dao.VideoService;
 
 /**
  *

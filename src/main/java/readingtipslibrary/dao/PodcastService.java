@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package readingtipslibrary.domain;
+package readingtipslibrary.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 import readingtipslibrary.dao.Database;
 import readingtipslibrary.dao.PodcastDao;
+import readingtipslibrary.domain.Podcast;
+import readingtipslibrary.domain.Tip;
 
 /**
  *

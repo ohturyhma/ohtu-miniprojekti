@@ -31,7 +31,7 @@ public class BlogDao implements Dao<Blogpost> {
     public List<Tip> findAll() throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM blogsposts");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM blogposts");
 
         List<Tip> blogs = new ArrayList<>();
 
