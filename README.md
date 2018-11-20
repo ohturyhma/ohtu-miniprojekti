@@ -13,7 +13,7 @@ Definition of done user storylle:
 * testaus
   - testataan toteutuksen toimivuus
 * automatisoitujen testien tekeminen
-  - testataan automaattisesti Cucumberia käyttäen
+  - testataan automaattisesti
 * integrointi
   - varmistetaan, että toteutus toimii kaiken muun kanssa yhdessä
 * dokumentointi
