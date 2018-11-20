@@ -7,8 +7,6 @@ package readingtipslibrary.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import readingtipslibrary.dao.BlogDao;
-import readingtipslibrary.dao.Database;
 import readingtipslibrary.domain.Blogpost;
 import readingtipslibrary.domain.Tip;
 
