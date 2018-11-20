@@ -1,4 +1,4 @@
-Feature: A user can check tips
+Feature: As a user I can check tips
 
   Scenario: all tips are shown as a list
     Given command all tips is selected
