@@ -57,7 +57,7 @@ public class Book implements Tip {
     }
 
     public String toString() {
-        return author + " " + title + " " + isbn + " " + type;
+        return author + ", " + title + ", " + isbn + ", " + type;
     }
 }
 /*

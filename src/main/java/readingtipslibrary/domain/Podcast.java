@@ -65,7 +65,7 @@ public class Podcast implements Tip {
     }
 
     public String toString() {
-        return author + " " + podcastName + " " + description + " " + type;
+        return podcastName + ", " + title + ", " + description + ", " + type;
     }
 }
 /*

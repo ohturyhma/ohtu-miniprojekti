@@ -69,10 +69,8 @@ public class ReadingTipsApplication {
                         String title = input.nextLine();
                         System.out.println("isbn: ?");
                         String isbn = input.nextLine();
-                        System.out.println("type: ?");
-                        String tyyppi = input.nextLine();
 
-                        if (bookService.insertBook(author, title, isbn, tyyppi)) {
+                        if (bookService.insertBook(author, title, isbn, "book")) {
                             System.out.println("Inserting a book succeeded.");
                         } else {
                             System.out.println("Inserting a book not successfull");
@@ -83,10 +81,8 @@ public class ReadingTipsApplication {
                         String title = input.nextLine();
                         System.out.println("url: ?");
                         String url = input.nextLine();
-                        System.out.println("type: ?");
-                        String tyyppi = input.nextLine();
 
-                        if (videoService.insertVideo(title, url, tyyppi)) {
+                        if (videoService.insertVideo(title, url, "video")) {
                             System.out.println("Inserting a video succeeded.");
                         } else {
                             System.out.println("Inserting a video not successfull");
@@ -99,10 +95,8 @@ public class ReadingTipsApplication {
                         String title = input.nextLine();
                         System.out.println("description: ?");
                         String description = input.nextLine();
-                        System.out.println("type: ?");
-                        String tyyppi = input.nextLine();
 
-                        if (podcastService.insertPodcast(author, title, description, tyyppi)) {
+                        if (podcastService.insertPodcast(author, title, description, "podcast")) {
                             System.out.println("Inserting a podcast succeeded.");
                         } else {
                             System.out.println("Inserting a podcast not successfull");
@@ -115,10 +109,8 @@ public class ReadingTipsApplication {
                         String title = input.nextLine();
                         System.out.println("url: ?");
                         String url = input.nextLine();
-                        System.out.println("type: ?");
-                        String tyyppi = input.nextLine();
 
-                        if (blogService.insertBlog(author, title, url, tyyppi)) {
+                        if (blogService.insertBlog(author, title, url, "blogpost")) {
                             System.out.println("Inserting a blog succeeded.");
                         } else {
                             System.out.println("Inserting a blog not successfull");

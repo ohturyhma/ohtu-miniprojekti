@@ -55,7 +55,7 @@ public class Blogpost implements Tip {
     }
     
     public String toString() {
-        return author + " " + title + " " + url + " " + type;
+        return author + ", " + title + ", " + url + ", " + type;
     }
 
 }
