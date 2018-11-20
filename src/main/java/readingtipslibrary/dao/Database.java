@@ -69,7 +69,7 @@ public class Database {
                 + " url varchar, title varchar, comment varchar, type varchar)");
         list.add("CREATE TABLE IF NOT EXISTS "
                 + "podcasts(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + " podcastName varchar, title varchar, description varchar, type varchar)");
+                + " name varchar, title varchar, description varchar, type varchar)");
         list.add("CREATE TABLE IF NOT EXISTS "
                 + "blogposts(id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + " author varchar, title varchar, url varchar, type varchar)");

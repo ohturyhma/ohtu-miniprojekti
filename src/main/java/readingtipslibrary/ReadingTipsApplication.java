@@ -39,8 +39,10 @@ public class ReadingTipsApplication {
     }
 
     public void run() throws Exception {
-
-        while (true) {
+        
+        boolean quit = false;
+        
+        while (!quit) {
 
             System.out.println("Commands: insert, find-all, quit");
             System.out.print("Enter command: ");
@@ -89,14 +91,14 @@ public class ReadingTipsApplication {
                         }
 
                     } else if (type.equals("podcast")) {
-                        System.out.println("Author: ?");
-                        String author = input.nextLine();
+                        System.out.println("Podcasts name: ?");
+                        String name = input.nextLine();
                         System.out.println("Title: ?");
                         String title = input.nextLine();
                         System.out.println("description: ?");
                         String description = input.nextLine();
 
-                        if (podcastService.insertPodcast(author, title, description, "podcast")) {
+                        if (podcastService.insertPodcast(name, title, description, "podcast")) {
                             System.out.println("Inserting a podcast succeeded.");
                         } else {
                             System.out.println("Inserting a podcast not successfull");
@@ -119,11 +121,12 @@ public class ReadingTipsApplication {
 
                     break;
                 case "quit":
+                    quit = true;
                     break;
                 default:
                     System.out.println("Enter a proper command (insert, find-all, quit)");
             }
-            break;
+            
         }
     }
 }
