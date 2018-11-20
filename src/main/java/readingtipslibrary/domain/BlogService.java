@@ -7,26 +7,26 @@ package readingtipslibrary.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import readingtipslibrary.dao.BlogDao;
 import readingtipslibrary.dao.Database;
-import readingtipslibrary.dao.VideoDao;
 
 /**
  *
  * @author johyry
  */
-public class VideoService {
-
-    private VideoDao videoDao;
-
-    public VideoService(Database database) {
-        this.videoDao = new VideoDao(database);
+public class BlogService {
+    private BlogDao blogDao;
+    
+    public BlogService(Database database) {
+        blogDao = new BlogDao(database);
     }
-
-    public boolean insertVideo(String url, String title, String type) {
-        Video video = new Video(title, url, type);
+    
+    
+    public boolean insertBlog(String author, String title, String url, String type) {
+        Blogpost blogpost = new Blogpost(author, title, url, type);
 
         try {
-            videoDao.insert(video);
+            blogDao.insert(blogpost);
         } catch (Exception e) {
             return false;
         }
@@ -35,16 +35,15 @@ public class VideoService {
     }
 
     public List<Tip> findAll() {
-        List<Tip> videos = new ArrayList<>();
+        List<Tip> blogs = new ArrayList<>();
         
         try {
-            videos = videoDao.findAll();
+            blogs = blogDao.findAll();
         } catch (Exception e) {
-            return videos;
+            return blogs;
         }
 
-        return videos;
+        return blogs;
 
     }
-
 }

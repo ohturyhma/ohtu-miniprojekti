@@ -18,6 +18,9 @@ import readingtipslibrary.dao.BookDao;
 import readingtipslibrary.dao.Database;
 import readingtipslibrary.dao.PodcastDao;
 import readingtipslibrary.dao.VideoDao;
+import readingtipslibrary.domain.BlogService;
+import readingtipslibrary.domain.BookService;
+import readingtipslibrary.domain.PodcastService;
 import readingtipslibrary.domain.Tip;
 import readingtipslibrary.domain.Video;
 import readingtipslibrary.domain.VideoService;
@@ -30,6 +33,9 @@ public class ReadingTipsApplication {
 
     private Scanner input;
     private VideoService videoService;
+    private BookService bookService;
+    private PodcastService podcastService;
+    private BlogService blogService;
     private Database database;
 
     public void init(Scanner scanner) throws ClassNotFoundException {
@@ -37,38 +43,28 @@ public class ReadingTipsApplication {
         Database database = new Database("jdbc:sqlite:readingtips.db");
         database.init();
         videoService = new VideoService(database);
+        bookService = new BookService(database);
+        podcastService = new PodcastService(database);
+        blogService = new BlogService(database);
     }
 
     public void run() throws Exception {
 
-        
-        // TÄÄ ON VAAN TESTI TOIMIIKO CONNECTION. VARSINAINEN CONNECTION TAPAHTUU DATABASE LUOKASSA
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:readingtips.db");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ReadingTipsApplication.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
         while (true) {
-            
-            
-            
+
             System.out.println("Commands: insert, find-all, quit");
             System.out.print("Enter command: ");
-           
+
             String command = input.nextLine();
 
             switch (command) {
                 case "find-all":
                     // method findAll has no implementation yet in any dao
                     List<Tip> allTypes = new ArrayList<>();
-//                    allTypes.addAll(bookDao.findAll());
+                    allTypes.addAll(bookService.findAll());
                     allTypes.addAll(videoService.findAll());
-//                    allTypes.addAll(podcastDao.findAll());
-//                    allTypes.addAll(blogDao.findAll());
+                    allTypes.addAll(podcastService.findAll());
+                    allTypes.addAll(blogService.findAll());
                     allTypes.stream().forEach(System.out::println);
                     break;
 
@@ -77,6 +73,20 @@ public class ReadingTipsApplication {
                     String type = input.nextLine();
 
                     if (type.equals("book")) {
+                        System.out.println("Author: ?");
+                        String author = input.nextLine();
+                        System.out.println("Title: ?");
+                        String title = input.nextLine();
+                        System.out.println("isbn: ?");
+                        String isbn = input.nextLine();
+                        System.out.println("type: ?");
+                        String tyyppi = input.nextLine();
+
+                        if (bookService.insertBook(author, title, isbn, tyyppi)) {
+                            System.out.println("Inserting a book succeeded.");
+                        } else {
+                            System.out.println("Inserting a book not successfull");
+                        }
 
                     } else if (type.equals("video")) {
                         System.out.println("Title: ?");
@@ -93,9 +103,36 @@ public class ReadingTipsApplication {
                         }
 
                     } else if (type.equals("podcast")) {
+                        System.out.println("Author: ?");
+                        String author = input.nextLine();
+                        System.out.println("Title: ?");
+                        String title = input.nextLine();
+                        System.out.println("description: ?");
+                        String description = input.nextLine();
+                        System.out.println("type: ?");
+                        String tyyppi = input.nextLine();
+
+                        if (podcastService.insertPodcast(author, title, description, tyyppi)) {
+                            System.out.println("Inserting a podcast succeeded.");
+                        } else {
+                            System.out.println("Inserting a podcast not successfull");
+                        }
 
                     } else if (type.equals("blog")) {
+                        System.out.println("Author: ?");
+                        String author = input.nextLine();
+                        System.out.println("Title: ?");
+                        String title = input.nextLine();
+                        System.out.println("url: ?");
+                        String url = input.nextLine();
+                        System.out.println("type: ?");
+                        String tyyppi = input.nextLine();
 
+                        if (blogService.insertBlog(author, title, url, tyyppi)) {
+                            System.out.println("Inserting a blog succeeded.");
+                        } else {
+                            System.out.println("Inserting a blog not successfull");
+                        }
                     }
 
                     break;

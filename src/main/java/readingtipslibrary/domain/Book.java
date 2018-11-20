@@ -21,7 +21,8 @@ public class Book implements Tip {
     private ArrayList<String> preliminaryCourses;
     private ArrayList<String> relatedCourses;
 
-    public Book(String author, String title, String type) {
+    public Book(String author, String title, String isbn, String type) {
+        this.isbn = isbn;
         this.author = author;
         this.title = title;
         this.type = type;
@@ -31,6 +32,33 @@ public class Book implements Tip {
         return type;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String toString() {
+        return author + " " + title + " " + isbn + " " + type;
+    }
 }
 /*
 Kirjoittaja: Robert Martin

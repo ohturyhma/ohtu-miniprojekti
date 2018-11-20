@@ -38,9 +38,8 @@ public class VideoDao implements Dao<Video> {
         while (rs.next()) {
             String title = rs.getString("title");
             String url = rs.getString("url");
-            String type = rs.getString("Type");
+            String type = rs.getString("type");
             videos.add(new Video(title, url, type));
-            System.out.println(title + " " + url + " " + type);
         }
 
         rs.close();
