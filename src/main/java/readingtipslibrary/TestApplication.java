@@ -33,6 +33,7 @@ public class TestApplication {
         this.input = tests;
         Database database = new Database("jdbc:sqlite:test.db");
         database.init();
+        prints = new ArrayList<>();
         videoService = new VideoService(database);
         bookService = new BookService(database);
         podcastService = new PodcastService(database);

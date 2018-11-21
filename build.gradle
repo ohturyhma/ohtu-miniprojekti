@@ -30,6 +30,11 @@ dependencies {
 
 }
 
+test {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+}
+
 jacoco {
 	toolVersion = '0.8.1'
 }

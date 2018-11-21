@@ -8,7 +8,10 @@ package readingtipslibrary;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static org.junit.Assert.assertTrue;
 import readingtipslibrary.dao.BlogService;
 import readingtipslibrary.dao.BookService;
@@ -22,13 +25,19 @@ import readingtipslibrary.dao.VideoService;
  */
 public class Stepdefs {
     
-    private TestApplication test;
+    private static TestApplication test;
     private VideoService videoService;
     private BookService bookService;
     private PodcastService podcastService;
     private BlogService blogService;
     private Database database;
-    private List<String> input;
+    private static List<String> input;
+    
+    public Stepdefs() throws ClassNotFoundException {
+            input = new ArrayList<>();
+            test = new TestApplication();
+            test.init(input);
+        }
     
     @Given ("^command insert and type video tip is selected$")
     public void commandInsertTipAndTypeVideoIsSelected() {
@@ -37,9 +46,10 @@ public class Stepdefs {
     }
     
     @When ("^title \"([^\"]*)\" and url \"([^\"]*)\" are entered$")
-    public void titleAndUrlAreEntered(String title, String url) {
+    public void titleAndUrlAreEntered(String title, String url) throws Exception {
         input.add(title);
         input.add(url);
+        test.run();
     }
     
     @Then("^system will respond with \"([^\"]*)\"$")
