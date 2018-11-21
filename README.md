@@ -18,3 +18,11 @@ Definition of done user storylle:
   - varmistetaan, että toteutus toimii kaiken muun kanssa yhdessä
 * dokumentointi
   - tehdään javadocsit luokille ja tärkeimmille metodeille
+
+
+_Asennusohjeet:_
+
+* git clone git@github.com:ohturyhma/ohtu-miniprojekti.git
+* avaa asennuskansio terminaalilla
+* gradle shadowJar
+* java -jar builds/libs/ohtu-miniprojekti-all.jar
