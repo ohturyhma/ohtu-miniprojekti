@@ -24,5 +24,8 @@ _Asennusohjeet:_
 
 * git clone git@github.com:ohturyhma/ohtu-miniprojekti.git
 * avaa asennuskansio terminaalilla
-* gradle shadowJar
+* ./gradlew
+* ./gradlew clean
+* ./gradlew build
+* ./gradlew shadowJar
 * java -jar builds/libs/ohtu-miniprojekti-all.jar
