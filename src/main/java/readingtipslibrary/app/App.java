@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package readingtipslibrary;
+package readingtipslibrary.app;
 
 import java.util.ArrayList;
 import java.util.List;
 import readingtipslibrary.dao.BlogService;
 import readingtipslibrary.dao.BookService;
-import readingtipslibrary.dao.Database;
 import readingtipslibrary.dao.PodcastService;
 import readingtipslibrary.dao.VideoService;
 import readingtipslibrary.domain.Tip;
@@ -56,7 +55,10 @@ public class App {
                     allTypes.addAll(videoService.findAll());
                     allTypes.addAll(podcastService.findAll());
                     allTypes.addAll(blogService.findAll());
-                    allTypes.stream().forEach(System.out::println);
+                    for (Tip x: allTypes) {
+                        io.print(x.toString());
+                    }
+//                    allTypes.stream().forEach(System.out::println);
                     break;
 
                 case "insert":
@@ -71,7 +73,7 @@ public class App {
                         if (bookService.insertBook(author, title, isbn, "book")) {
                             io.print("Inserting a book succeeded.");
                         } else {
-                            io.print("Inserting a book not successfull");
+                            io.print("Inserting a book not successfull.");
                         }
 
                     } else if (type.equals("video")) {
@@ -82,7 +84,7 @@ public class App {
                         if (videoService.insertVideo(title, url, "video")) {
                             io.print("Inserting a video succeeded.");
                         } else {
-                            io.print("Inserting a video not successfull");
+                            io.print("Inserting a video not successfull.");
                         }
 
                     } else if (type.equals("podcast")) {
@@ -94,7 +96,7 @@ public class App {
                         if (podcastService.insertPodcast(name, title, description, "podcast")) {
                             io.print("Inserting a podcast succeeded.");
                         } else {
-                            io.print("Inserting a podcast not successfull");
+                            io.print("Inserting a podcast not successfull.");
                         }
 
                     } else if (type.equals("blog")) {
@@ -106,7 +108,7 @@ public class App {
                         if (blogService.insertBlog(author, title, url, "blogpost")) {
                             io.print("Inserting a blog succeeded.");
                         } else {
-                            io.print("Inserting a blog not successfull");
+                            io.print("Inserting a blog not successfull.");
                         }
                     }
 

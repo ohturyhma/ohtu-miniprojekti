@@ -71,11 +71,6 @@ public class Database {
         list.add("CREATE TABLE IF NOT EXISTS "
                 + "blogposts(id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + " author varchar, title varchar, url varchar, type varchar)");
-        
-        
-        
-        
-        
 
         return list;
     }

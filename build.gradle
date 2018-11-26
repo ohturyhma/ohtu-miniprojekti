@@ -33,6 +33,7 @@ dependencies {
 test {
     testLogging.showStandardStreams = true
     systemProperties System.getProperties()
+    systemProperties['user.dir'] = workingDir
 }
 
 jacoco {
@@ -47,9 +48,11 @@ jacocoTestReport {
     afterEvaluate {
         classDirectories = files(classDirectories.files.collect {
                 fileTree(dir: it,
-                    exclude: ['readingtipslibrary/ReadingTips**','readingtipslibrary/TestApplication**'])
+                    exclude: ['readingtipslibrary.app/ReadingTips**','readingtipslibrary.app/TestApplication**',
+                    'readingtipslibrary.app/App**', 'readingtipslibrary.app/ConsoleIO**','readingtipslibrary.app/Main**',
+                    'readingtipslibrary.app/IO**', 'readingtipslibrary.app/StunIO**'])
             })
     }
 }
 
-mainClassName = 'readingtipslibrary.ReadingTipsLibrary'
+mainClassName = 'readingtipslibrary.Main'

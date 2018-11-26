@@ -33,10 +33,6 @@ public class Video implements Tip {
     public String getType() {
         return type;
     }
-    
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getTitle() {
         return title;

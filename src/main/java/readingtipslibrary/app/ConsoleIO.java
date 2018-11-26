@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package readingtipslibrary;
+package readingtipslibrary.app;
 
 import java.util.Scanner;
 import readingtipslibrary.dao.Database;
