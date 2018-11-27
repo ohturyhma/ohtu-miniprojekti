@@ -30,6 +30,7 @@ public class Book implements Tip {
      * @param title The title of the book
      * @param isbn The ISBN-code for the book
      * @param type The type of the book
+     * @param description The description of the book
      */
     public Book(String author, String title, String isbn, String type, String description) {
         this.isbn = isbn;

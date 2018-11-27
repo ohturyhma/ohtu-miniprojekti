@@ -95,7 +95,7 @@ public class BookDao implements Dao<Book> {
     @Override
     public void destroyAll() throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("TRUNCATE TABLE books"); 
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM books"); 
         stmt.executeUpdate();
         stmt.close();
         connection.close();

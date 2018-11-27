@@ -90,7 +90,7 @@ public class VideoDao implements Dao<Video> {
     @Override
     public void destroyAll() throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("TRUNCATE TABLE videos"); 
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM videos"); 
         stmt.executeUpdate();
         stmt.close();
         connection.close();

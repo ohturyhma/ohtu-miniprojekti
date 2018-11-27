@@ -90,7 +90,7 @@ public class PodcastDao implements Dao<Podcast> {
     @Override
     public void destroyAll() throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("TRUNCATE TABLE podcasts"); 
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM podcasts"); 
         stmt.executeUpdate();
         stmt.close();
         connection.close();
