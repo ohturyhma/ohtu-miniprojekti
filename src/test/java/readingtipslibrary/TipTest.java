@@ -26,30 +26,30 @@ public class TipTest {
 
     @Before
     public void setup() {
-        book = new Book("author", "title", "isbn", "type");
-        blog = new Blogpost("author", "title", "url", "type");
-        pod = new Podcast("podcastName", "title", "description", "type");
-        video = new Video("title", "url", "type");
+        book = new Book("author", "title", "isbn", "type", "description");
+        blog = new Blogpost("author", "title", "url", "type", "description");
+        pod = new Podcast("podcastName", "title", "type", "description");
+        video = new Video("title", "url", "type", "description");
     }
 
     @Test
     public void bookToString() {
-        assertEquals("author, title, isbn, type", book.toString());
+        assertEquals("author, title, isbn, type, description", book.toString());
     }
 
     @Test
     public void blogpostToString() {
-        assertEquals("author, title, url, type", blog.toString());
+        assertEquals("author, title, url, type, description", blog.toString());
     }
 
     @Test
     public void podcastToString() {
-        assertEquals("podcastName, title, description, type", pod.toString());
+        assertEquals("podcastName, title, type, description", pod.toString());
     }
 
     @Test
     public void videoToString() {
-        assertEquals("title, url, type", video.toString());
+        assertEquals("title, url, type, description", video.toString());
     }
 
     @Test
@@ -81,7 +81,7 @@ public class TipTest {
         assertEquals("uusi", pod.getAuthor());
         assertEquals("123", pod.getDescription());
         assertEquals("testi", pod.getPodcastName());
-        assertEquals("uusitesti",pod.getTitle());
+        assertEquals("uusitesti", pod.getTitle());
     }
 
     @Test

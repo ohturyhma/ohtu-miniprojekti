@@ -35,10 +35,18 @@ public class App {
 
         while (!quit) {
 
-            io.print("Commands: insert, find-all, delete, quit");
+            io.print("Commands: insert, find-type, find-all, delete, quit");
             String command = io.readLine("Enter command: ");
 
             switch (command) {
+                case "find-type":
+                    String typeToFind = io.readLine("type: ?");
+                    List<Tip> allFromType = findByType(typeToFind);
+                    for (Tip tip : allFromType) {
+                        io.print(tip.toString());
+                    }
+                    
+                break;
                 case "find-all":
                     // method findAll has no implementation yet in any dao
                     List<Tip> allTypes = new ArrayList<>();
@@ -60,8 +68,8 @@ public class App {
                         String author = io.readLine("Author: ?");
                         String title = io.readLine("Title: ?");
                         String isbn = io.readLine("isbn: ?");
-
-                        if (daoService.insertBook(author, title, isbn, "book")) {
+                        String description = io.readLine("description: ?");
+                        if (daoService.insertBook(author, title, isbn, "book", description)) {
                             io.print("Inserting a book succeeded.");
                         } else {
                             io.print("Inserting a book not successfull.");
@@ -71,8 +79,8 @@ public class App {
 
                         String title = io.readLine("Title: ?");
                         String url = io.readLine("url: ?");
-
-                        if (daoService.insertVideo(title, url, "video")) {
+                        String description = io.readLine("description: ?");
+                        if (daoService.insertVideo(title, url, "video", description)) {
                             io.print("Inserting a video succeeded.");
                         } else {
                             io.print("Inserting a video not successfull.");
@@ -95,8 +103,8 @@ public class App {
                         String author = io.readLine("Author: ?");
                         String title = io.readLine("Title: ?");
                         String url = io.readLine("url: ?");
-
-                        if (daoService.insertBlog(author, title, url, "blogpost")) {
+                        String description = io.readLine("description: ?");
+                        if (daoService.insertBlog(author, title, url, "blogpost", description)) {
                             io.print("Inserting a blog succeeded.");
                         } else {
                             io.print("Inserting a blog not successfull.");
@@ -146,10 +154,31 @@ public class App {
                     quit = true;
                     break;
                 default:
-                    io.print("Enter a proper command (insert, find-all, delete, quit)");
+                    io.print("Enter a proper command (insert, find-type, find-all, delete, quit)");
             }
 
         }
+    }
+
+    private List<Tip> findByType(String typeToFind) {
+        List<Tip> tips = new ArrayList<>();
+        switch(typeToFind) {
+            case "book":
+                tips = daoService.findAllBooks();
+            break;
+            case "blog":
+                tips = daoService.findAllBlogs();
+            break;
+            case "video":
+                tips = daoService.findAllVideos();
+            break;
+            case "podcast":
+                 tips = daoService.findAllPodcasts();   
+            break;
+            default:
+                io.print("Enter a proper type (book, podcast, video, blog)");
+        }
+        return tips;
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package readingtipslibrary.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import readingtipslibrary.domain.Blogpost;
@@ -33,12 +34,12 @@ public class DaoService {
     }
 
     // book methods
-    public boolean insertBook(String author, String title, String isbn, String type) {
-        Book book = new Book(author, title, isbn, type);
+    public boolean insertBook(String author, String title, String isbn, String type, String description) {
+        Book book = new Book(author, title, isbn, type, description);
 
         try {
             bookDao.insert(book);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return false;
         }
 
@@ -50,7 +51,7 @@ public class DaoService {
 
         try {
             books = bookDao.findAll();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return books;
         }
 
@@ -61,19 +62,18 @@ public class DaoService {
     public boolean destroyAllBooks() {
         try {
             bookDao.destroyAll();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return false;
         }
         return true;
     }
 
     // BLOG METHODS
-    public boolean insertBlog(String author, String title, String url, String type) {
-        Blogpost blogpost = new Blogpost(author, title, url, type);
-
+    public boolean insertBlog(String author, String title, String url, String type, String description) {
+        Blogpost blogpost = new Blogpost(author, title, url, type, description);
         try {
             blogDao.insert(blogpost);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return false;
         }
 
@@ -85,7 +85,7 @@ public class DaoService {
 
         try {
             blogs = blogDao.findAll();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return blogs;
         }
 
@@ -96,7 +96,7 @@ public class DaoService {
     public boolean destroyAllBlogs() {
         try {
             blogDao.destroyAll();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return false;
         }
         return true;
@@ -104,11 +104,11 @@ public class DaoService {
 
     // podcast methods
     public boolean insertPodcast(String podcastName, String title, String description, String type) {
-        Podcast podcast = new Podcast(podcastName, title, description, type);
+        Podcast podcast = new Podcast(podcastName, title, type, description);
 
         try {
             podcastDao.insert(podcast);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return false;
         }
 
@@ -120,7 +120,7 @@ public class DaoService {
 
         try {
             podcasts = podcastDao.findAll();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return podcasts;
         }
 
@@ -131,19 +131,19 @@ public class DaoService {
     public boolean destroyAllPodcasts() {
         try {
             podcastDao.destroyAll();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return false;
         }
         return true;
     }
 
     // video methods
-    public boolean insertVideo(String title, String url, String type) {
-        Video video = new Video(title, url, type);
+    public boolean insertVideo(String title, String url, String type, String description) {
+        Video video = new Video(title, url, type, description);
 
         try {
             videoDao.insert(video);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return false;
         }
 
@@ -155,7 +155,7 @@ public class DaoService {
 
         try {
             videos = videoDao.findAll();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return videos;
         }
 
@@ -166,7 +166,7 @@ public class DaoService {
     public boolean destroyAllVideos() {
         try {
             videoDao.destroyAll();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return false;
         }
         return true;

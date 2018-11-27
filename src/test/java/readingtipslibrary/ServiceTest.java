@@ -31,13 +31,13 @@ public class ServiceTest {
 
     @Test
     public void blogService() {
-        assertTrue(daoService.insertBlog("author", "title", "url", "type"));
+        assertTrue(daoService.insertBlog("author", "title", "url", "type", "description"));
         assertFalse(daoService.findAllBlogs().isEmpty());
     }
 
     @Test
     public void bookService() {
-        assertTrue(daoService.insertBook("author", "title", "isbn", "type"));
+        assertTrue(daoService.insertBook("author", "title", "isbn", "type", "description"));
         assertFalse(daoService.findAllBooks().isEmpty());
     }
 
@@ -49,7 +49,7 @@ public class ServiceTest {
 
     @Test
     public void videoService() {
-        assertTrue(daoService.insertVideo("title", "url", "type"));
+        assertTrue(daoService.insertVideo("title", "url", "type", "description"));
         assertFalse(daoService.findAllVideos().isEmpty());
     }
 

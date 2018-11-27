@@ -18,6 +18,7 @@ public class Blogpost implements Tip {
     private String url;
     private String type;
     private ArrayList<String> relatedCourses;
+    private String description;
     /**
      * Constructor for a blogpost
      * @param author The author of the blogpost
@@ -25,13 +26,23 @@ public class Blogpost implements Tip {
      * @param url The URL at which the blogpost is found
      * @param type The type of the blogpost
      */
-    public Blogpost(String author, String title, String url, String type) {
+    public Blogpost(String author, String title, String url, String type, String description) {
         this.author = author;
         this.title = title;
         this.url = url;
         this.type = type;
+        this.description = description;
+    }
+    
+    public String getDescription() {
+        return this.description;
+    }
+    
+    public void setDescription(final String description) {
+        this.description = description;
     }
 
+    @Override
     public String getType() {
         return type;
     }
@@ -62,7 +73,7 @@ public class Blogpost implements Tip {
     
     @Override
     public String toString() {
-        return author + ", " + title + ", " + url + ", " + type;
+        return author + ", " + title + ", " + url + ", " + type + ", " + description;
     }
 
 }

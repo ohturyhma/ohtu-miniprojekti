@@ -18,18 +18,29 @@ public class Video implements Tip {
     private ArrayList<String> relatedCourses;
     private String type;
     private String comment;
+    private String description;
     /**
      * Constructor for a video
      * @param title The title of the video
      * @param url The URL at which the video is found
      * @param type The type of the video
      */
-    public Video(String title, String url, String type) {
+    public Video(String title, String url, String type, String description) {
         this.title = title;
         this.url = url;
         this.type = type;
+        this.description = description;
+    }
+    
+    public String getDescription() {
+        return this.description;
+    }
+    
+    public void setDescription(final String description) {
+        this.description = description;
     }
 
+    @Override
     public String getType() {
         return type;
     }
@@ -52,7 +63,7 @@ public class Video implements Tip {
     
     @Override
     public String toString() {
-        return title + ", " + url + ", " + type;
+        return title + ", " + url + ", " + type + ", " + description;
     }
 
 }

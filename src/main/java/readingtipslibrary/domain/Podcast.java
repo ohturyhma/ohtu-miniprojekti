@@ -24,16 +24,17 @@ public class Podcast implements Tip {
      * Constructor for a podcast
      * @param podcastName Name of the podcast
      * @param title The title of the episode of the podcast
-     * @param description description of the podcast
      * @param type The type of the podcast
+     * @param description description of the podcast
      */
-    public Podcast(String podcastName, String title, String description, String type) {
+    public Podcast(String podcastName, String title, String type, String description) {
         this.podcastName = podcastName;
         this.title = title;
         this.type = type;
         this.description = description;
     }
 
+    @Override
     public String getType() {
         return type;
     }
@@ -72,7 +73,7 @@ public class Podcast implements Tip {
     
     @Override
     public String toString() {
-        return podcastName + ", " + title + ", " + description + ", " + type;
+        return podcastName + ", " + title + ", " + type + ", " + description;
     }
 }
 /*

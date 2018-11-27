@@ -53,7 +53,8 @@ public class BookDao implements Dao<Book> {
             String title = rs.getString("title");
             String isbn = rs.getString("isbn");
             String type = rs.getString("Type");
-            books.add(new Book(author, title, isbn, type));
+            String description = rs.getString("description");
+            books.add(new Book(author, title, isbn, type, description));
         }
 
         rs.close();

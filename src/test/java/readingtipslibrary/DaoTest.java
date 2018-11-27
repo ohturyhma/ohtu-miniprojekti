@@ -51,28 +51,28 @@ public class DaoTest {
 
     @Test
     public void blogDaoTest() throws SQLException {
-        Blogpost blog = new Blogpost("author", "title", "url", "type");
+        Blogpost blog = new Blogpost("author", "title", "url", "type", "description");
         assertEquals(blog, blogD.insert(blog));
         assertFalse(blogD.findAll().isEmpty());
     }
 
     @Test
     public void bookDaoTest() throws SQLException {
-        Book book = new Book("author", "title", "isbn", "type");
+        Book book = new Book("author", "title", "isbn", "type", "description");
         assertEquals(book, bookD.insert(book));
         assertFalse(bookD.findAll().isEmpty());
     }
 
     @Test
     public void podcastDaoTest() throws SQLException {
-        Podcast pod = new Podcast("podcastName", "title", "description", "type");
+        Podcast pod = new Podcast("podcastName", "title", "type", "description");
         assertEquals(pod, podD.insert(pod));
         assertFalse(podD.findAll().isEmpty());
     }
 
     @Test
     public void videoDaoTest() throws SQLException {
-        Video video = new Video("title", "url", "type");
+        Video video = new Video("title", "url", "type", "description");
         assertEquals(video, videoD.insert(video));
         assertFalse(videoD.findAll().isEmpty());
     }

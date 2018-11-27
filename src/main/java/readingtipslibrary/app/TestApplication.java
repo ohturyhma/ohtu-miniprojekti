@@ -42,6 +42,12 @@ public class TestApplication {
             i++;
 
             switch (command) {
+                case "find-type":
+                    String typeToFind = input.get(i);
+                    i++;
+                    List<Tip> allFromType = findByType(typeToFind);
+                    
+                break;
                 case "find-all":
                     // method findAll has no implementation yet in any dao
                     List<Tip> allTypes = new ArrayList<>();
@@ -66,7 +72,9 @@ public class TestApplication {
                         //                    System.out.println("isbn: ?");
                         String isbn = input.get(i);
                         i++;
-                        if (daoService.insertBook(author, title, isbn, "book")) {
+                        String description = input.get(i);
+                        i++;
+                        if (daoService.insertBook(author, title, isbn, "book", description)) {
                             prints.add("Inserting a book succeeded.");
                         } else {
                             prints.add("Inserting a book not successfull");
@@ -79,7 +87,9 @@ public class TestApplication {
                         //                      System.out.println("url: ?");
                         String url = input.get(i);
                         i++;
-                        if (daoService.insertVideo(title, url, "video")) {
+                        String description = input.get(i);
+                        i++;
+                        if (daoService.insertVideo(title, url, "video", description)) {
                             prints.add("Inserting a video succeeded.");
                         } else {
                             prints.add("Inserting a video not successfull");
@@ -111,7 +121,9 @@ public class TestApplication {
                         //                    System.out.println("url: ?");
                         String url = input.get(i);
                         i++;
-                        if (daoService.insertBlog(author, title, url, "blogpost")) {
+                        String description = input.get(i);
+                        i++;
+                        if (daoService.insertBlog(author, title, url, "blogpost", description)) {
                             prints.add("Inserting a blog succeeded.");
                         } else {
                             prints.add("Inserting a blog not successfull");
@@ -132,6 +144,25 @@ public class TestApplication {
 
     public List<String> getPrints() {
         return prints;
+    }
+
+    private List<Tip> findByType(String typeToFind) {
+        List<Tip> tips = new ArrayList<>();
+        switch(typeToFind) {
+            case "book":
+                tips = daoService.findAllBooks();
+            break;
+            case "blog":
+                tips = daoService.findAllBlogs();
+            break;
+            case "video":
+                tips = daoService.findAllVideos();
+            break;
+            case "podcast":
+                 tips = daoService.findAllPodcasts();   
+            break;
+        }
+        return tips;
     }
     
     

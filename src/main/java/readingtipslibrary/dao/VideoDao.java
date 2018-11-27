@@ -50,7 +50,9 @@ public class VideoDao implements Dao<Video> {
             String title = rs.getString("title");
             String url = rs.getString("url");
             String type = rs.getString("type");
-            videos.add(new Video(title, url, type));
+            String description = rs.getString("description");
+            videos.add(new Video(title, url, type, description));
+            
         }
 
         rs.close();

@@ -53,7 +53,8 @@ public class BlogDao implements Dao<Blogpost> {
             String title = rs.getString("title");
             String url = rs.getString("url");
             String type = rs.getString("Type");
-            blogs.add(new Blogpost(author, title, url, type));
+            String description = rs.getString("description");
+            blogs.add(new Blogpost(author, title, url, type, description));
         }
 
         rs.close();

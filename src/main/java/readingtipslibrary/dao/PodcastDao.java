@@ -51,7 +51,7 @@ public class PodcastDao implements Dao<Podcast> {
             String title = rs.getString("title");
             String description = rs.getString("description");
             String type = rs.getString("type");
-            podcasts.add(new Podcast(name, title, description, type));
+            podcasts.add(new Podcast(name, title, type, description));
         }
 
         rs.close();

@@ -46,7 +46,7 @@ public class Stepdefs {
     public void commandInsertTipAndTypeBlogpostIsSelected() {
         insert("blogpost");
     }
-    
+
     @Given("^command find-all is selected$")
     public void commandFindAllIsSelected() {
         input.add("find-all");
@@ -61,7 +61,7 @@ public class Stepdefs {
     public void authorAndTitleAndIsbnAreEntered(String author, String title, String isbn) throws ClassNotFoundException, Exception {
         addAndQuit(author, title, isbn);
     }
-
+    
     @When("^podcastName \"([^\"]*)\" and title \"([^\"]*)\" and description \"([^\"]*)\" are entered$")
     public void podcastNameAndTitleAndDescriptionAreEntered(String podcastName, String title, String description) throws ClassNotFoundException, Exception {
         addAndQuit(podcastName, title, description);
@@ -97,6 +97,17 @@ public class Stepdefs {
         input.add(x);
         input.add(y);
         input.add("quit");
+        io = new StubIO(input);
+        app = new App();
+        app.init(io);
+        app.run();
+    }
+    
+        private void addDontQuit(String firstArg, String secondArg, String thirdArg, String fourthArg) throws ClassNotFoundException, Exception {
+        input.add(firstArg);
+        input.add(secondArg);
+        input.add(thirdArg);
+        input.add(fourthArg);
         io = new StubIO(input);
         app = new App();
         app.init(io);
