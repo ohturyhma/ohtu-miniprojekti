@@ -149,11 +149,14 @@ public class App {
                             break;
                     }
                     break;
+                case "delete-all":
+                    deleteAll();
+                    break;
                 case "quit":
                     quit = true;
                     break;
                 default:
-                    io.print("Enter a proper command (insert, find-type, find-all, delete-type, quit)");
+                    io.print("Enter a proper command (insert, find-type, find-all, delete-type, delete-all, quit)");
             }
 
         }
