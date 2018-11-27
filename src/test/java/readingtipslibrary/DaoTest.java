@@ -8,6 +8,7 @@ package readingtipslibrary;
 import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import readingtipslibrary.dao.BlogDao;
@@ -54,6 +55,9 @@ public class DaoTest {
         Blogpost blog = new Blogpost("author", "title", "url", "type", "description");
         assertEquals(blog, blogD.insert(blog));
         assertFalse(blogD.findAll().isEmpty());
+        blogD.insert(new Blogpost("author2", "title2", "url2", "type2", "description2"));
+        blogD.destroyAll();
+        assertTrue(blogD.findAll().isEmpty());
     }
 
     @Test
@@ -61,6 +65,9 @@ public class DaoTest {
         Book book = new Book("author", "title", "isbn", "type", "description");
         assertEquals(book, bookD.insert(book));
         assertFalse(bookD.findAll().isEmpty());
+        bookD.insert(new Book("author2", "title2", "isbn2", "type2", "description2"));
+        bookD.destroyAll();
+        assertTrue(bookD.findAll().isEmpty());
     }
 
     @Test
@@ -68,6 +75,9 @@ public class DaoTest {
         Podcast pod = new Podcast("podcastName", "title", "type", "description");
         assertEquals(pod, podD.insert(pod));
         assertFalse(podD.findAll().isEmpty());
+        podD.insert(new Podcast("podcastName2", "title2", "type2", "description2"));
+        podD.destroyAll();
+        assertTrue(podD.findAll().isEmpty());
     }
 
     @Test
@@ -75,6 +85,9 @@ public class DaoTest {
         Video video = new Video("title", "url", "type", "description");
         assertEquals(video, videoD.insert(video));
         assertFalse(videoD.findAll().isEmpty());
+        videoD.insert(new Video("title2", "url2","type2", "description2"));
+        videoD.destroyAll();
+        assertTrue(videoD.findAll().isEmpty());
     }
 
 }

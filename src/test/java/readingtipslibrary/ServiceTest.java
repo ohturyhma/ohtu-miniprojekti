@@ -32,25 +32,33 @@ public class ServiceTest {
     @Test
     public void blogService() {
         assertTrue(daoService.insertBlog("author", "title", "url", "type", "description"));
-        assertFalse(daoService.findAllBlogs().isEmpty());
+        assertFalse(!daoService.findAllBlogs().isEmpty());
+        daoService.destroyAllBlogs();
+        assertTrue(daoService.findAllBlogs().isEmpty());
     }
 
     @Test
     public void bookService() {
         assertTrue(daoService.insertBook("author", "title", "isbn", "type", "description"));
         assertFalse(daoService.findAllBooks().isEmpty());
+        daoService.destroyAllBooks();
+        assertTrue(daoService.findAllBooks().isEmpty());
     }
 
     @Test
     public void podcastService() {
         assertTrue(daoService.insertPodcast("podcastName", "title", "description", "type"));
         assertFalse(daoService.findAllPodcasts().isEmpty());
-    }
+        daoService.destroyAllPodcasts();
+        assertTrue(daoService.findAllPodcasts().isEmpty());
+}
 
     @Test
     public void videoService() {
         assertTrue(daoService.insertVideo("title", "url", "type", "description"));
         assertFalse(daoService.findAllVideos().isEmpty());
+        daoService.destroyAllVideos();
+        assertTrue(daoService.findAllVideos().isEmpty());
     }
 
 }

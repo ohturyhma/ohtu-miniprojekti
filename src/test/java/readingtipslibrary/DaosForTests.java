@@ -55,7 +55,7 @@ public class DaosForTests implements Dao {
 
     @Override
     public void destroyAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        tips.clear();
     }
 
 }
