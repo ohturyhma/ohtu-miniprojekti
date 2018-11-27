@@ -148,6 +148,7 @@ public class App {
                             io.print("Enter a proper type (book, podcast, video, blog or all)");
                             break;
                     }
+                    break;
                 case "quit":
                     quit = true;
                     break;
@@ -159,7 +160,7 @@ public class App {
     }
 
     private void deleteAll() {
-        ArrayList<String> deletionStates = new ArrayList<>();
+        List<String> deletionStates = new ArrayList<>();
         if (daoService.destroyAllBooks()) {
             deletionStates.add("Deleting all books succeeded.");
         } else {
