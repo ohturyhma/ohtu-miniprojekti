@@ -10,11 +10,8 @@ import org.junit.Test;
 import java.sql.SQLException;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import readingtipslibrary.dao.BlogService;
-import readingtipslibrary.dao.BookService;
+import readingtipslibrary.dao.DaoService;
 import readingtipslibrary.dao.Database;
-import readingtipslibrary.dao.PodcastService;
-import readingtipslibrary.dao.VideoService;
 
 /**
  *
@@ -22,44 +19,38 @@ import readingtipslibrary.dao.VideoService;
  */
 public class ServiceTest {
 
-    private BlogService blogS;
-    private BookService bookS;
-    private PodcastService podS;
-    private VideoService videoS;
+    private DaoService daoService;
     private Database database;
 
     @Before
     public void setup() throws ClassNotFoundException, SQLException {
         database = new Database("jdbc:sqlite:test.db");
         database.init();
-        blogS = new BlogService(database);
-        bookS = new BookService(database);
-        podS = new PodcastService(database);
-        videoS = new VideoService(database);
+        daoService = new DaoService(database);
     }
 
     @Test
     public void blogService() {
-        assertTrue(blogS.insertBlog("author", "title", "url", "type"));
-        assertFalse(blogS.findAll().isEmpty());
+        assertTrue(daoService.insertBlog("author", "title", "url", "type"));
+        assertFalse(daoService.findAllBlogs().isEmpty());
     }
 
     @Test
     public void bookService() {
-        assertTrue(bookS.insertBook("author", "title", "isbn", "type"));
-        assertFalse(bookS.findAll().isEmpty());
+        assertTrue(daoService.insertBook("author", "title", "isbn", "type"));
+        assertFalse(daoService.findAllBooks().isEmpty());
     }
 
     @Test
     public void podcastService() {
-        assertTrue(podS.insertPodcast("podcastName", "title", "description", "type"));
-        assertFalse(podS.findAll().isEmpty());
+        assertTrue(daoService.insertPodcast("podcastName", "title", "description", "type"));
+        assertFalse(daoService.findAllPodcasts().isEmpty());
     }
 
     @Test
     public void videoService() {
-        assertTrue(videoS.insertVideo("title", "url", "type"));
-        assertFalse(videoS.findAll().isEmpty());
+        assertTrue(daoService.insertVideo("title", "url", "type"));
+        assertFalse(daoService.findAllVideos().isEmpty());
     }
 
 }

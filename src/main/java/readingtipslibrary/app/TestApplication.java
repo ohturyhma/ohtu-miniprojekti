@@ -8,11 +8,8 @@ package readingtipslibrary.app;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import readingtipslibrary.dao.BlogService;
-import readingtipslibrary.dao.BookService;
+import readingtipslibrary.dao.DaoService;
 import readingtipslibrary.dao.Database;
-import readingtipslibrary.dao.PodcastService;
-import readingtipslibrary.dao.VideoService;
 import readingtipslibrary.domain.Tip;
 
 /**
@@ -22,10 +19,7 @@ import readingtipslibrary.domain.Tip;
 public class TestApplication {
 
     private List<String> input;
-    private VideoService videoService;
-    private BookService bookService;
-    private PodcastService podcastService;
-    private BlogService blogService;
+    private DaoService daoService;
     private Database database;
     private List<String> prints;
 
@@ -34,10 +28,7 @@ public class TestApplication {
         Database database = new Database("jdbc:sqlite:test.db");
         database.init();
         prints = new ArrayList<>();
-        videoService = new VideoService(database);
-        bookService = new BookService(database);
-        podcastService = new PodcastService(database);
-        blogService = new BlogService(database);
+        daoService = new DaoService(database);
     }
 
     public void run() throws Exception {
@@ -54,10 +45,10 @@ public class TestApplication {
                 case "find-all":
                     // method findAll has no implementation yet in any dao
                     List<Tip> allTypes = new ArrayList<>();
-                    allTypes.addAll(bookService.findAll());
-                    allTypes.addAll(videoService.findAll());
-                    allTypes.addAll(podcastService.findAll());
-                    allTypes.addAll(blogService.findAll());
+                    allTypes.addAll(daoService.findAllBooks());
+                    allTypes.addAll(daoService.findAllPodcasts());
+                    allTypes.addAll(daoService.findAllVideos());
+                    allTypes.addAll(daoService.findAllBlogs());
                     //                allTypes.stream().forEach(System.out::println);
                     break;
 
@@ -75,7 +66,7 @@ public class TestApplication {
                         //                    System.out.println("isbn: ?");
                         String isbn = input.get(i);
                         i++;
-                        if (bookService.insertBook(author, title, isbn, "book")) {
+                        if (daoService.insertBook(author, title, isbn, "book")) {
                             prints.add("Inserting a book succeeded.");
                         } else {
                             prints.add("Inserting a book not successfull");
@@ -88,7 +79,7 @@ public class TestApplication {
                         //                      System.out.println("url: ?");
                         String url = input.get(i);
                         i++;
-                        if (videoService.insertVideo(title, url, "video")) {
+                        if (daoService.insertVideo(title, url, "video")) {
                             prints.add("Inserting a video succeeded.");
                         } else {
                             prints.add("Inserting a video not successfull");
@@ -104,7 +95,7 @@ public class TestApplication {
                         //                    System.out.println("description: ?");
                         String description = input.get(i);
                         i++;
-                        if (podcastService.insertPodcast(name, title, description, "podcast")) {
+                        if (daoService.insertPodcast(name, title, description, "podcast")) {
                             prints.add("Inserting a podcast succeeded.");
                         } else {
                             prints.add("Inserting a podcast not successfull");
@@ -120,7 +111,7 @@ public class TestApplication {
                         //                    System.out.println("url: ?");
                         String url = input.get(i);
                         i++;
-                        if (blogService.insertBlog(author, title, url, "blogpost")) {
+                        if (daoService.insertBlog(author, title, url, "blogpost")) {
                             prints.add("Inserting a blog succeeded.");
                         } else {
                             prints.add("Inserting a blog not successfull");

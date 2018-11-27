@@ -13,10 +13,7 @@ import cucumber.api.java.en.When;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertFalse;
-import readingtipslibrary.dao.BlogService;
-import readingtipslibrary.dao.BookService;
-import readingtipslibrary.dao.PodcastService;
-import readingtipslibrary.dao.VideoService;
+import readingtipslibrary.dao.DaoService;
 
 /**
  *
@@ -26,10 +23,7 @@ public class Stepdefs {
 
     private App app;
     private StubIO io;
-    private VideoService videoService;
-    private BookService bookService;
-    private PodcastService podcastService;
-    private BlogService blogService;
+    private DaoService daoService;
 
     private List<String> input = new ArrayList<>();
 
