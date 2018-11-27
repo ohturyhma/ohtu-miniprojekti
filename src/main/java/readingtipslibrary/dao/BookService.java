@@ -48,5 +48,13 @@ public class BookService {
         return books;
 
     }
-
+    
+    public boolean destroyAll(){
+        try{
+            bookDao.destroyAll();
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
 }

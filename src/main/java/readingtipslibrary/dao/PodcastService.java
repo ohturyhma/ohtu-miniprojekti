@@ -48,5 +48,14 @@ public class PodcastService {
 
         return podcasts;
 
+    }    
+    
+    public boolean destroyAll(){
+        try{
+            podcastDao.destroyAll();
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 }

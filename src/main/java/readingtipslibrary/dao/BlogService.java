@@ -45,4 +45,13 @@ public class BlogService {
         return blogs;
 
     }
+    
+    public boolean destroyAll(){
+        try{
+            blogDao.destroyAll();
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
 }

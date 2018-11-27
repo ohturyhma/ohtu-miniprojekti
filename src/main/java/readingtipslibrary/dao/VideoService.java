@@ -48,5 +48,13 @@ public class VideoService {
         return videos;
 
     }
-
+    
+    public boolean destroyAll(){
+        try{
+            videoDao.destroyAll();
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
 }
