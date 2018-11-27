@@ -82,5 +82,17 @@ public class PodcastDao implements Dao<Podcast> {
         connection.close();
         return podcast;
     }
-
+    /**
+     * Deletes all data in the table podcasts
+     * 
+     * @throws SQLException 
+     */
+    @Override
+    public void destroyAll() throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("TRUNCATE TABLE podcasts"); 
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
+    }
 }

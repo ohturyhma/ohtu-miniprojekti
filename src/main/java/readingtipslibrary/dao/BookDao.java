@@ -86,4 +86,17 @@ public class BookDao implements Dao<Book> {
         return book;
     }
 
+    /**
+     * Deletes all data in the table books
+     * 
+     * @throws SQLException 
+     */
+    @Override
+    public void destroyAll() throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("TRUNCATE TABLE books"); 
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
+    }
 }

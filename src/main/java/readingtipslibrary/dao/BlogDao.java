@@ -85,5 +85,18 @@ public class BlogDao implements Dao<Blogpost> {
         connection.close();
         return blogpost;
     }
-
+    
+    /**
+     * Deletes all data in the table blogposts
+     * 
+     * @throws SQLException 
+     */
+    @Override
+    public void destroyAll() throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("TRUNCATE TABLE blogposts"); 
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
+    }
 }

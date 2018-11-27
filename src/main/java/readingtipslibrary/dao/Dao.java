@@ -28,4 +28,10 @@ public interface Dao<T> {
      */
     public Tip insert(T t) throws SQLException;
     
+    /**
+     * Destroys all the tips in the database of the type T
+     * @throws SQLException
+     */
+    public void destroyAll() throws SQLException;
+    
 }
