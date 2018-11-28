@@ -20,6 +20,7 @@ public class Book extends Tip {
         type.setContent("book");
         Field f;
         String[] genericFields = new String[]{"description", "ISBN", "title", "author"};
+        fieldNames = new String[]{"author", "title", "description", "ISBN", "url"};
         for (String s : genericFields){
             f = new GenericField(s);
             fields.put(s,f);

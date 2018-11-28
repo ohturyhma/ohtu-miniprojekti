@@ -76,7 +76,10 @@ public class App {
                                 loop = false;
                         }
                     }
-                    io.print("Successfully added a " + type + "!");
+                    if (daoService.insert(t))
+                        io.print("Successfully added a " + type + "!");
+                    else
+                        io.print("There was a problem with adding a " + type + ".");
                     break;
                 case "delete-type":
                     type = io.readLine("What type of tips do you want to delete? Command deletes all of them. (book, blog, podcast, video or all): ");

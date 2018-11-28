@@ -35,7 +35,7 @@ public class DaoService {
     
     public List<Tip> findAll(String type) {
         List<Tip> tips = new ArrayList<>();
-        tips.add(new Book());
+        
         try {
             tips = tipDao.findAll(type);
         } catch (SQLException e) {

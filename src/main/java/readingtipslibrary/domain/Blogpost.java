@@ -21,6 +21,7 @@ public class Blogpost extends Tip {
         type.setContent("blogpost");
         Field f;
         String[] genericFields = new String[]{"author", "title", "description"};
+        fieldNames = new String[]{"author", "title", "description", "url"};
         for (String s : genericFields){
             f = new GenericField(s);
             fields.put(s,f);

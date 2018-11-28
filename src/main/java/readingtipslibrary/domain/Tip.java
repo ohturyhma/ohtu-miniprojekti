@@ -13,6 +13,7 @@ import java.util.HashMap;
 public abstract class Tip {
     protected TypeField type;
     protected HashMap<String, Field> fields;
+    protected String[] fieldNames;
     
     public TypeField getType() {
         return type;
@@ -25,7 +26,7 @@ public abstract class Tip {
     }
     
     public String[] getFieldNames(){
-        return fields.keySet().toArray(new String[0]);
+        return fieldNames;
     }
     
     public String getName(){

@@ -64,13 +64,13 @@ public class Database {
                 + " author varchar, title varchar, description varchar, ISBN varchar, url varchar)");
         list.add("CREATE TABLE IF NOT EXISTS "
                 + "videos(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + " url varchar, title varchar, description varchar, url varchar)");
+                + " url varchar, title varchar, description varchar)");
         list.add("CREATE TABLE IF NOT EXISTS "
                 + "podcasts(id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + " name varchar, title varchar, description varchar, url varchar)");
         list.add("CREATE TABLE IF NOT EXISTS "
                 + "blogposts(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + " author varchar, title varchar, url varchar, description varchar, url varchar)");
+                + " author varchar, title varchar, url varchar, description varchar)");
 
         return list;
     }

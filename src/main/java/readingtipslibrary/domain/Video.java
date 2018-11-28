@@ -19,6 +19,7 @@ public class Video extends Tip {
         type.setContent("video");
         Field f;
         String[] genericFields = new String[]{"title", "description"};
+        fieldNames = new String[]{"title", "description", "url"};
         for (String s : genericFields){
             f = new GenericField(s);
             fields.put(s,f);
