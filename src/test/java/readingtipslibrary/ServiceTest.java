@@ -32,7 +32,7 @@ public class ServiceTest {
     @Test
     public void blogService() {
         assertTrue(daoService.insertBlog("author", "title", "url", "type", "description"));
-        assertFalse(!daoService.findAllBlogs().isEmpty());
+        assertFalse(daoService.findAllBlogs().isEmpty());
         daoService.destroyAllBlogs();
         assertTrue(daoService.findAllBlogs().isEmpty());
     }

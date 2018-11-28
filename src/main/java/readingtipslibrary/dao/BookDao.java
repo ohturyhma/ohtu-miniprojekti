@@ -75,11 +75,12 @@ public class BookDao implements Dao<Book> {
     public Tip insert(Book book) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO books"
-                + " (author, title, isbn, type) VALUES (?, ?, ?, ?)");
+                + " (author, title, description, isbn, type) VALUES (?, ?, ?, ?, ?)");
         stmt.setObject(1, book.getAuthor());
         stmt.setObject(2, book.getTitle());
-        stmt.setObject(3, book.getIsbn());
-        stmt.setObject(4, book.getType());
+        stmt.setObject(3, book.getDescription());
+        stmt.setObject(4, book.getIsbn());
+        stmt.setObject(5, book.getType());
 
         stmt.executeUpdate();
         stmt.close();

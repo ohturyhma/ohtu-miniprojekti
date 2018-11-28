@@ -72,10 +72,11 @@ public class VideoDao implements Dao<Video> {
     public Video insert(Video video) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO videos"
-                + " (url, title, type) VALUES (?, ?, ?)");
+                + " (url, title, description, type) VALUES (?, ?, ?, ?)");
         stmt.setObject(1, video.getUrl());
         stmt.setObject(2, video.getTitle());
-        stmt.setObject(3, video.getType());
+        stmt.setObject(3, video.getDescription());
+        stmt.setObject(4, video.getType());
 
         stmt.executeUpdate();
         stmt.close();

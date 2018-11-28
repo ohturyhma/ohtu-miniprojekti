@@ -75,11 +75,12 @@ public class BlogDao implements Dao<Blogpost> {
     public Tip insert(Blogpost blogpost) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO blogposts"
-                + " (author, title, url, type) VALUES (?, ?, ?, ?)");
+                + " (author, title, url, description, type) VALUES (?, ?, ?, ?, ?)");
         stmt.setObject(1, blogpost.getAuthor());
         stmt.setObject(2, blogpost.getTitle());
         stmt.setObject(3, blogpost.getUrl());
-        stmt.setObject(4, blogpost.getType());
+        stmt.setObject(4, blogpost.getDescription());
+        stmt.setObject(5, blogpost.getType());
 
         stmt.executeUpdate();
         stmt.close();
