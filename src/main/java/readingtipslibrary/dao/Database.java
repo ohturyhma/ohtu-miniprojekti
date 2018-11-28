@@ -61,16 +61,16 @@ public class Database {
         // create tables
         list.add("CREATE TABLE IF NOT EXISTS "
                 + "books(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + " author varchar, title varchar, description varchar, isbn varchar, type varchar)");
+                + " author varchar, title varchar, description varchar, isbn varchar, url varchar)");
         list.add("CREATE TABLE IF NOT EXISTS "
                 + "videos(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + " url varchar, title varchar, description varchar, comment varchar, type varchar)");
+                + " url varchar, title varchar, description varchar)");
         list.add("CREATE TABLE IF NOT EXISTS "
                 + "podcasts(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + " name varchar, title varchar, description varchar, type varchar)");
+                + " name varchar, title varchar, description varchar, url varchar)");
         list.add("CREATE TABLE IF NOT EXISTS "
                 + "blogposts(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + " author varchar, title varchar, url varchar, description varchar, type varchar)");
+                + " author varchar, title varchar, url varchar, description varchar)");
 
         return list;
     }

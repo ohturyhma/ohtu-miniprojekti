@@ -5,75 +5,27 @@
  */
 package readingtipslibrary.domain;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Class containing data for a podcast episode
  * @author strajama
  */
-public class Podcast implements Tip {
+public class Podcast extends Tip {
 
-    private String author;
-    private String podcastName;
-    private String title;
-    private String description;
-    private String type;
-    private ArrayList<String> tags;
-    private ArrayList<String> relatedCourses;
-    /**
-     * Constructor for a podcast
-     * @param podcastName Name of the podcast
-     * @param title The title of the episode of the podcast
-     * @param type The type of the podcast
-     * @param description description of the podcast
-     */
-    public Podcast(String podcastName, String title, String type, String description) {
-        this.podcastName = podcastName;
-        this.title = title;
-        this.type = type;
-        this.description = description;
-    }
-
-    @Override
-    public String getType() {
-        return type;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getPodcastName() {
-        return podcastName;
-    }
-
-    public void setPodcastName(String podcastName) {
-        this.podcastName = podcastName;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    
-    @Override
-    public String toString() {
-        return podcastName + ", " + title + ", " + type + ", " + description;
+     public Podcast(){
+        fields = new HashMap<>();
+        type = new TypeField();
+        type.setContent("podcast");
+        Field f;
+        String[] genericFields = new String[]{"author", "title", "description"};
+        fieldNames = new String[]{"author", "title", "description", "url"};
+        for (String s : genericFields){
+            f = new GenericField(s);
+            fields.put(s,f);
+        }
+        f = new UrlField();
+        fields.put(f.name,f);
     }
 }
 /*

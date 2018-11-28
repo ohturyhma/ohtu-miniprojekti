@@ -5,78 +5,32 @@
  */
 package readingtipslibrary.domain;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+
+
 
 /**
- * Class containing data for a blogpost
- * @author strajama
+ * 
+ * @author Vertti
  */
-public class Blogpost implements Tip {
-
-    private String title;
-    private String author;
-    private String url;
-    private String type;
-    private ArrayList<String> relatedCourses;
-    private String description;
-    /**
-     * Constructor for a blogpost
-     * @param author The author of the blogpost
-     * @param title The title of the blogpost
-     * @param url The URL at which the blogpost is found
-     * @param type The type of the blogpost
-     */
-    public Blogpost(String author, String title, String url, String type, String description) {
-        this.author = author;
-        this.title = title;
-        this.url = url;
-        this.type = type;
-        this.description = description;
-    }
+public class Blogpost extends Tip {
     
-    public String getDescription() {
-        return this.description;
+    public Blogpost(){
+        fields = new HashMap<>();
+        type = new TypeField();
+        type.setContent("blogpost");
+        Field f;
+        String[] genericFields = new String[]{"author", "title", "description"};
+        fieldNames = new String[]{"author", "title", "description", "url"};
+        for (String s : genericFields){
+            f = new GenericField(s);
+            fields.put(s,f);
+        }
+        f = new UrlField();
+        fields.put(f.name,f);
     }
-    
-    public void setDescription(final String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String getType() {
-        return type;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-    
-    @Override
-    public String toString() {
-        return author + ", " + title + ", " + url + ", " + type + ", " + description;
-    }
-
 }
+
 /*
 Otsikko: Consistency models
 Kirjoittaja: Nicola Apicella

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import readingtipslibrary.dao.DaoService;
 import readingtipslibrary.domain.Tip;
+import readingtipslibrary.domain.TypeField;
 
 /**
  *
@@ -42,12 +43,7 @@ public class App {
                 case "find-type":
                     String typeToFind = io.readLine("What do you want to find? (book, blog, podcast, video or all)");
                     if (!typeToFind.equals("all")) {
-                        List<Tip> allFromType = findByType(typeToFind);
-                        System.out.println(typeToFind + "s: ");
-                        for (Tip tip : allFromType) {
-                            io.print(tip.toString());
-                        }
-                        System.out.println();
+                        findType(typeToFind);
                     } else {
                         findAll();
                     }
@@ -59,97 +55,50 @@ public class App {
                 case "insert":
                     String type = io.readLine("What do you want to insert? (book, blog, podcast, video): ");
 
-                    switch (type) {
-                        case "book": {
-                            String author = io.readLine("Author: ?");
-                            String title = io.readLine("Title: ?");
-                            String isbn = io.readLine("isbn: ?");
-                            String description = io.readLine("description: ?");
-                            if (daoService.insertBook(author, title, isbn, "book", description)) {
-                                io.print("Inserting a book succeeded.");
-                            } else {
-                                io.print("Inserting a book not successfull.");
-                            }
-                            break;
-                        }
-                        case "video": {
-                            String title = io.readLine("Title: ?");
-                            String url = io.readLine("url: ?");
-                            String description = io.readLine("description: ?");
-                            if (daoService.insertVideo(title, url, "video", description)) {
-                                io.print("Inserting a video succeeded.");
-                            } else {
-                                io.print("Inserting a video not successfull.");
-                            }
-                            break;
-                        }
-                        case "podcast": {
-                            String name = io.readLine("Podcasts name: ?");
-                            String title = io.readLine("Title: ?");
-                            String description = io.readLine("description: ?");
-                            if (daoService.insertPodcast(name, title, description, "podcast")) {
-                                io.print("Inserting a podcast succeeded.");
-                            } else {
-                                io.print("Inserting a podcast not successfull.");
-                            }
-                            break;
-                        }
-                        case "blog": {
-                            String author = io.readLine("Author: ?");
-                            String title = io.readLine("Title: ?");
-                            String url = io.readLine("url: ?");
-                            String description = io.readLine("description: ?");
-                            if (daoService.insertBlog(author, title, url, "blogpost", description)) {
-                                io.print("Inserting a blog succeeded.");
-                            } else {
-                                io.print("Inserting a blog not successfull.");
-                            }
-                            break;
-                        }
-                        default:
-                            break;
+                    boolean valid = false;
+                    for (String s : TypeField.POSSIBLE_TYPES) {
+                        valid = valid || type.equals(s);
                     }
-
+                    if (!valid) {
+                        io.print(type + " is not a valid type to insert.");
+                        break;
+                    }
+                    Tip t = Tip.tipFromType(type);
+                    String s;
+                    boolean loop;
+                    for (String field : t.getFieldNames()) {
+                        loop = true;
+                        while (loop) {
+                            s = io.readLine(t.getField(field).toString() + "?");
+                            if (!t.getField(field).setContent(s)) {
+                                io.print("'" + s + "' is not a valid " + field + ".");
+                            } else {
+                                loop = false;
+                            }
+                        }
+                    }
+                    if (daoService.insert(t)) {
+                        io.print("Successfully added a " + type + "!");
+                    } else {
+                        io.print("There was a problem with adding the " + type + ".");
+                    }
                     break;
                 case "delete-type":
-                    type = io.readLine("What do you want to delete? Command deletes all of them. (books, blogs, podcasts, videos or all): ");
+                    type = io.readLine("What type of tips do you want to delete? Command deletes all of them. (book, blog, podcast, video or all): ");
 
-                    switch (type) {
-                        case "books":
-                            if (daoService.destroyAllBooks()) {
-                                io.print("Deleting all books succeeded.");
-                            } else {
-                                io.print("Deleting all books not successfull.");
-                            }
-                            break;
-                        case "videos":
-                            if (daoService.destroyAllVideos()) {
-                                io.print("Deleting all videos succeeded.");
-                            } else {
-                                io.print("Deleting all videos not successfull.");
-                            }
-                            break;
-                        case "podcasts":
-                            if (daoService.destroyAllPodcasts()) {
-                                io.print("Deleting all podcasts succeeded.");
-                            } else {
-                                io.print("Deleting all podcasts not successfull.");
-                            }
-                            break;
-                        case "blogs":
-                            if (daoService.destroyAllBlogs()) {
-                                io.print("Deleting all blogs succeeded.");
-                            } else {
-                                io.print("Deleting all blogs not successfull.");
-                            }
-                            break;
-                        case "all":
-                            deleteAll();
-                            break;
-                        default:
-                            io.print("Enter a proper type (book, podcast, video, blog or all)");
-                            break;
+                    if (type.equals("all")) {
+                        deleteAll();
+                        break;
                     }
+                    valid = false;
+                    for (String string : TypeField.POSSIBLE_TYPES) {
+                        valid = valid || type.equals(string);
+                    }
+                    if (!valid) {
+                        io.print(type + " is not a valid type to delete.");
+                        break;
+                    }
+                    deleteType(type);
                     break;
                 case "delete-all":
                     deleteAll();
@@ -165,85 +114,31 @@ public class App {
     }
 
     private void deleteAll() {
-        List<String> deletionStates = new ArrayList<>();
-        if (daoService.destroyAllBooks()) {
-            deletionStates.add("Deleting all books succeeded.");
-        } else {
-            deletionStates.add("Deleting all books not succesful.");
+        for (String s : TypeField.POSSIBLE_TYPES) {
+            deleteType(s);
         }
-        if (daoService.destroyAllBlogs()) {
-            deletionStates.add("Deleting all blogs succeeded.");
+    }
+
+    private void deleteType(String type) {
+        if (daoService.deleteAll(type)) {
+            io.print("Deleting all " + type + "s succesful!");
         } else {
-            deletionStates.add("Deleting all blogs not succesful.");
-        }
-        if (daoService.destroyAllVideos()) {
-            deletionStates.add("Deleting all videos succeeded.");
-        } else {
-            deletionStates.add("Deleting all videos not succesful.");
-        }
-        if (daoService.destroyAllPodcasts()) {
-            deletionStates.add("Deleting all podcasts succeeded.");
-        } else {
-            deletionStates.add("Deleting all podcasts not succesful.");
-        }
-        for (String s : deletionStates) {
-            io.print(s);
+            io.print("There was a problem with deleting all " + type + "s.");
         }
     }
 
     private void findAll() {
-
-        List<Tip> books = new ArrayList<>();
-        List<Tip> videos = new ArrayList<>();
-        List<Tip> podcasts = new ArrayList<>();
-        List<Tip> blogs = new ArrayList<>();
-
-        books.addAll(daoService.findAllBooks());
-        videos.addAll(daoService.findAllVideos());
-        podcasts.addAll(daoService.findAllPodcasts());
-        blogs.addAll(daoService.findAllBlogs());
-
-        System.out.println();
-        System.out.println("Books: ");
-        for (Tip x : books) {
-            io.print(x.toString());
+        for (String s : TypeField.POSSIBLE_TYPES) {
+            findType(s);
         }
-        System.out.println();
-        System.out.println("Videos: ");
-        for (Tip x : videos) {
-            io.print(x.toString());
-        }
-        System.out.println();
-        System.out.println("Podcasts: ");
-        for (Tip x : podcasts) {
-            io.print(x.toString());
-        }
-        System.out.println();
-        System.out.println("Blogs: ");
-        for (Tip x : blogs) {
-            io.print(x.toString());
-        }
-//                    allTypes.stream().forEach(System.out::println);
     }
 
-    private List<Tip> findByType(String typeToFind) {
-        List<Tip> tips = new ArrayList<>();
-        switch (typeToFind) {
-            case "book":
-                tips = daoService.findAllBooks();
-                break;
-            case "blog":
-                tips = daoService.findAllBlogs();
-                break;
-            case "video":
-                tips = daoService.findAllVideos();
-                break;
-            case "podcast":
-                tips = daoService.findAllPodcasts();
-                break;
-            default:
-                io.print("Enter a proper type (book, podcast, video, blog)");
+    private void findType(String type) {
+        List<Tip> allFromType = daoService.findAll(type);
+        io.print(type + "s:");
+        for (Tip tip : allFromType) {
+            io.print(tip.toString());
         }
-        return tips;
+        System.out.println();
     }
 }
