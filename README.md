@@ -22,8 +22,6 @@ Definition of done user storylle:
   - testataan automaattisesti
 * integrointi
   - varmistetaan, että toteutus toimii kaiken muun kanssa yhdessä
-* dokumentointi
-  - tehdään javadocsit luokille ja tärkeimmille metodeille
 
 
 _Asennusohjeet:_
