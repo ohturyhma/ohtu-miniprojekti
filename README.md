@@ -34,4 +34,4 @@ _Asennusohjeet:_
 * ./gradlew shadowJar
 * java -jar builds/libs/ohtu-miniprojekti-all.jar
 
-[Ohjelman toimintojen hyväksymiskriteerit](https://github.com/ohturyhma/ohtu-miniprojekti/blob/master/toimintojen%20hyv%C3%A4ksymiskriteerit.md)
+[Ohjelman toimintojen hyväksymiskriteerit](https://github.com/ohturyhma/ohtu-miniprojekti/blob/master/toimintojenkriteerit.md)
