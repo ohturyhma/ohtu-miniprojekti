@@ -1,4 +1,4 @@
-# Ohjelman toimintojen hyväksymiskriteetit
+# Ohjelman toimintojen hyväksymiskriteerit
 
 ## insert
 Kun käyttäjä on antanut ohjelman pyytämät tiedot, niin ohjelma tallettaa uuden vinkin
