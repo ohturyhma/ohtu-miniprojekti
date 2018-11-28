@@ -34,7 +34,7 @@ public class App {
         boolean quit = false;
 
         while (!quit) {
-
+            System.out.println();
             io.print("Commands: insert, find-type, find-all, delete-type, delete-all, quit");
             String command = io.readLine("Enter command: ");
 
@@ -43,9 +43,11 @@ public class App {
                     String typeToFind = io.readLine("What do you want to find? (book, blog, podcast, video or all)");
                     if (!typeToFind.equals("all")) {
                         List<Tip> allFromType = findByType(typeToFind);
+                        System.out.println(typeToFind + "s: ");
                         for (Tip tip : allFromType) {
                             io.print(tip.toString());
                         }
+                        System.out.println();
                     } else {
                         findAll();
                     }
@@ -191,12 +193,34 @@ public class App {
 
     private void findAll() {
 
-        List<Tip> allTypes = new ArrayList<>();
-        allTypes.addAll(daoService.findAllBooks());
-        allTypes.addAll(daoService.findAllVideos());
-        allTypes.addAll(daoService.findAllPodcasts());
-        allTypes.addAll(daoService.findAllBlogs());
-        for (Tip x : allTypes) {
+        List<Tip> books = new ArrayList<>();
+        List<Tip> videos = new ArrayList<>();
+        List<Tip> podcasts = new ArrayList<>();
+        List<Tip> blogs = new ArrayList<>();
+
+        books.addAll(daoService.findAllBooks());
+        videos.addAll(daoService.findAllVideos());
+        podcasts.addAll(daoService.findAllPodcasts());
+        blogs.addAll(daoService.findAllBlogs());
+
+        System.out.println();
+        System.out.println("Books: ");
+        for (Tip x : books) {
+            io.print(x.toString());
+        }
+        System.out.println();
+        System.out.println("Videos: ");
+        for (Tip x : videos) {
+            io.print(x.toString());
+        }
+        System.out.println();
+        System.out.println("Podcasts: ");
+        for (Tip x : podcasts) {
+            io.print(x.toString());
+        }
+        System.out.println();
+        System.out.println("Blogs: ");
+        for (Tip x : blogs) {
             io.print(x.toString());
         }
 //                    allTypes.stream().forEach(System.out::println);
