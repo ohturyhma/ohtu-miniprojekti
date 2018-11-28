@@ -8,7 +8,6 @@ package readingtipslibrary.dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import readingtipslibrary.domain.Book;
 import readingtipslibrary.domain.Tip;
 
 /**

@@ -70,16 +70,18 @@ public class App {
                         loop = true;
                         while (loop) {
                             s = io.readLine(t.getField(field).toString() + "?");
-                            if (!t.getField(field).setContent(s)){
+                            if (!t.getField(field).setContent(s)) {
                                 io.print("'" + s + "' is not a valid " + field + ".");
-                            } else
+                            } else {
                                 loop = false;
+                            }
                         }
                     }
-                    if (daoService.insert(t))
+                    if (daoService.insert(t)) {
                         io.print("Successfully added a " + type + "!");
-                    else
-                        io.print("There was a problem with adding a " + type + ".");
+                    } else {
+                        io.print("There was a problem with adding the " + type + ".");
+                    }
                     break;
                 case "delete-type":
                     type = io.readLine("What type of tips do you want to delete? Command deletes all of them. (book, blog, podcast, video or all): ");

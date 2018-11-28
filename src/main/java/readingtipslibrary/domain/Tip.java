@@ -46,7 +46,6 @@ public abstract class Tip {
     @Override
     public String toString(){
         String s = "";
-        s += type.nameContentPrint();
         for(Field f : fields.values()){
             s += f.nameContentPrint();
         }

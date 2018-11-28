@@ -61,7 +61,7 @@ public class Database {
         // create tables
         list.add("CREATE TABLE IF NOT EXISTS "
                 + "books(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + " author varchar, title varchar, description varchar, ISBN varchar, url varchar)");
+                + " author varchar, title varchar, description varchar, isbn varchar, url varchar)");
         list.add("CREATE TABLE IF NOT EXISTS "
                 + "videos(id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + " url varchar, title varchar, description varchar)");

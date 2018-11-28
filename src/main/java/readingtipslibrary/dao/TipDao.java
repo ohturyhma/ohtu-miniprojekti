@@ -11,13 +11,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import readingtipslibrary.domain.Book;
 import readingtipslibrary.domain.Tip;
 
 /**
- * Data Access Object for Books
  *
- * @author nroope
+ * @author Vertti
  */
 public class TipDao {
 
@@ -54,7 +52,7 @@ public class TipDao {
 
     public Tip insert(Tip t) throws SQLException {
         Connection connection = database.getConnection();
-        String statementString = "INSERT INTO " + t.getType() + "s (";
+        String statementString = "INSERT INTO " + t.getType().getContent() + "s (";
         String[] fieldNames = t.getFieldNames();
         for( int i = 0; i < fieldNames.length; ++i){
            if (i != 0)
@@ -72,6 +70,7 @@ public class TipDao {
         for( int i = 0; i < fieldNames.length; ++i){
             stmt.setObject(i+1, t.getField(fieldNames[i]).getContent());
         }
+        
         stmt.executeUpdate();
         stmt.close();
         connection.close();
