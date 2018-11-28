@@ -8,168 +8,50 @@ package readingtipslibrary.dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import readingtipslibrary.domain.Blogpost;
 import readingtipslibrary.domain.Book;
-import readingtipslibrary.domain.Podcast;
 import readingtipslibrary.domain.Tip;
-import readingtipslibrary.domain.Video;
 
 /**
  *
- * @author johyry
+ * @author Vertti
  */
 public class DaoService {
 
-    private Dao bookDao;
-    private Dao blogDao;
-    private Dao podcastDao;
-    private Dao videoDao;
+    private TipDao tipDao;
 
     public DaoService(Database database) {
-        this.bookDao = new BookDao(database);
-        this.blogDao = new BlogDao(database);
-        this.podcastDao = new PodcastDao(database);
-        this.videoDao = new VideoDao(database);
-
+        this.tipDao = new TipDao(database);
     }
 
-    // book methods
-    public boolean insertBook(String author, String title, String isbn, String type, String description) {
-        Book book = new Book(author, title, isbn, type, description);
-
+    public boolean insert(Tip tip) {
         try {
-            bookDao.insert(book);
+            tipDao.insert(tip);
         } catch (SQLException e) {
             return false;
         }
 
         return true;
     }
-
-    public List<Tip> findAllBooks() {
-        List<Tip> books = new ArrayList<>();
-
+    
+    public List<Tip> findAll(String type) {
+        List<Tip> tips = new ArrayList<>();
+        tips.add(new Book());
         try {
-            books = bookDao.findAll();
+            tips = tipDao.findAll(type);
         } catch (SQLException e) {
-            return books;
+            return tips;
         }
 
-        return books;
+        return tips;
 
     }
-
-    public boolean destroyAllBooks() {
+    
+    public boolean deleteAll(String type) {
         try {
-            bookDao.destroyAll();
-        } catch (SQLException e) {
-            return false;
-        }
-        return true;
-    }
-
-    // BLOG METHODS
-    public boolean insertBlog(String author, String title, String url, String type, String description) {
-        Blogpost blogpost = new Blogpost(author, title, url, type, description);
-        try {
-            blogDao.insert(blogpost);
-        } catch (SQLException e) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public List<Tip> findAllBlogs() {
-        List<Tip> blogs = new ArrayList<>();
-
-        try {
-            blogs = blogDao.findAll();
-        } catch (SQLException e) {
-            return blogs;
-        }
-
-        return blogs;
-
-    }
-
-    public boolean destroyAllBlogs() {
-        try {
-            blogDao.destroyAll();
+            tipDao.deleteAll(type);
         } catch (SQLException e) {
             return false;
         }
         return true;
     }
-
-    // podcast methods
-    public boolean insertPodcast(String podcastName, String title, String description, String type) {
-        Podcast podcast = new Podcast(podcastName, title, type, description);
-
-        try {
-            podcastDao.insert(podcast);
-        } catch (SQLException e) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public List<Tip> findAllPodcasts() {
-        List<Tip> podcasts = new ArrayList<>();
-
-        try {
-            podcasts = podcastDao.findAll();
-        } catch (SQLException e) {
-            return podcasts;
-        }
-
-        return podcasts;
-
-    }
-
-    public boolean destroyAllPodcasts() {
-        try {
-            podcastDao.destroyAll();
-        } catch (SQLException e) {
-            return false;
-        }
-        return true;
-    }
-
-    // video methods
-    public boolean insertVideo(String title, String url, String type, String description) {
-        Video video = new Video(title, url, type, description);
-
-        try {
-            videoDao.insert(video);
-        } catch (SQLException e) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public List<Tip> findAllVideos() {
-        List<Tip> videos = new ArrayList<>();
-
-        try {
-            videos = videoDao.findAll();
-        } catch (SQLException e) {
-            return videos;
-        }
-
-        return videos;
-
-    }
-
-    public boolean destroyAllVideos() {
-        try {
-            videoDao.destroyAll();
-        } catch (SQLException e) {
-            return false;
-        }
-        return true;
-    }
-
 }

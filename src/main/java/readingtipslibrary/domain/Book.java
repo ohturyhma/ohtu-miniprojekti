@@ -5,81 +5,27 @@
  */
 package readingtipslibrary.domain;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Class containing the data for a book
  *
  * @author strajama
  */
-public class Book implements Tip {
+public class Book extends Tip {
 
-    private String author;
-    private String title;
-    private String type;
-    private String isbn;
-    private ArrayList<String> tags;
-    private ArrayList<String> preliminaryCourses;
-    private ArrayList<String> relatedCourses;
-    private String description;
-
-    /**
-     * Constructor for a book
-     *
-     * @param author The author of the book
-     * @param title The title of the book
-     * @param isbn The ISBN-code for the book
-     * @param type The type of the book
-     * @param description The description of the book
-     */
-    public Book(String author, String title, String isbn, String type, String description) {
-        this.isbn = isbn;
-        this.author = author;
-        this.title = title;
-        this.type = type;
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(final String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String getType() {
-        return type;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    @Override
-    public String toString() {
-        return author + ", " + title + ", " + isbn + ", " + type + ", " + description;
+    public Book(){
+        fields = new HashMap<>();
+        type = new TypeField();
+        type.setContent("book");
+        Field f;
+        String[] genericFields = new String[]{"description", "ISBN", "title", "author"};
+        for (String s : genericFields){
+            f = new GenericField(s);
+            fields.put(s,f);
+        }
+        f = new UrlField();
+        fields.put(f.name,f);
     }
 }
 /*

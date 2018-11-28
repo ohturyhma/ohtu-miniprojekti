@@ -5,67 +5,27 @@
  */
 package readingtipslibrary.domain;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Class containing video for a podcast episode
  * @author strajama
  */
-public class Video implements Tip {
+public class Video extends Tip {
 
-    private String title;
-    private String url;
-    private ArrayList<String> relatedCourses;
-    private String type;
-    private String comment;
-    private String description;
-    /**
-     * Constructor for a video
-     * @param title The title of the video
-     * @param url The URL at which the video is found
-     * @param type The type of the video
-     */
-    public Video(String title, String url, String type, String description) {
-        this.title = title;
-        this.url = url;
-        this.type = type;
-        this.description = description;
+     public Video(){
+        fields = new HashMap<>();
+        type = new TypeField();
+        type.setContent("video");
+        Field f;
+        String[] genericFields = new String[]{"title", "description"};
+        for (String s : genericFields){
+            f = new GenericField(s);
+            fields.put(s,f);
+        }
+        f = new UrlField();
+        fields.put(f.name,f);
     }
-    
-    public String getDescription() {
-        return this.description;
-    }
-    
-    public void setDescription(final String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String getType() {
-        return type;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-    
-    @Override
-    public String toString() {
-        return title + ", " + url + ", " + type + ", " + description;
-    }
-
 }
 /*
 
