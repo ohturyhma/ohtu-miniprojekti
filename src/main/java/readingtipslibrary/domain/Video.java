@@ -14,18 +14,13 @@ import java.util.HashMap;
 public class Video extends Tip {
 
      public Video(){
-        fields = new HashMap<>();
         type = new TypeField();
         type.setContent("video");
-        Field f;
         String[] genericFields = new String[]{"title", "description"};
-        fieldNames = new String[]{"title", "description", "url"};
         for (String s : genericFields){
-            f = new GenericField(s);
-            fields.put(s,f);
+            addField(new GenericField(s));
         }
-        f = new UrlField();
-        fields.put(f.name,f);
+        addField(new UrlField());
     }
 }
 /*

@@ -15,18 +15,13 @@ import java.util.HashMap;
 public class Book extends Tip {
 
     public Book(){
-        fields = new HashMap<>();
         type = new TypeField();
         type.setContent("book");
-        Field f;
-        String[] genericFields = new String[]{"description", "isbn", "title", "author"};
-        fieldNames = new String[]{"author", "title", "description", "isbn", "url"};
+        String[] genericFields = new String[]{"author", "title", "isbn", "description"};
         for (String s : genericFields){
-            f = new GenericField(s);
-            fields.put(s,f);
+            addField(new GenericField(s));
         }
-        f = new UrlField();
-        fields.put(f.name,f);
+        addField(new UrlField());
     }
 }
 /*

@@ -16,18 +16,13 @@ import java.util.HashMap;
 public class Blogpost extends Tip {
     
     public Blogpost(){
-        fields = new HashMap<>();
         type = new TypeField();
         type.setContent("blogpost");
-        Field f;
         String[] genericFields = new String[]{"author", "title", "description"};
-        fieldNames = new String[]{"author", "title", "description", "url"};
         for (String s : genericFields){
-            f = new GenericField(s);
-            fields.put(s,f);
+            addField(new GenericField(s));
         }
-        f = new UrlField();
-        fields.put(f.name,f);
+        addField(new UrlField());
     }
 }
 

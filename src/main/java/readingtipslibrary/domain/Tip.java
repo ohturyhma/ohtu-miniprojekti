@@ -6,14 +6,15 @@
 package readingtipslibrary.domain;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 /**
  *
  * @author Vertti
  */
 public abstract class Tip {
     protected TypeField type;
-    protected HashMap<String, Field> fields;
-    protected String[] fieldNames;
+    private HashMap<String, Field> fields;
+    private ArrayList<String> fieldNames;
     
     public TypeField getType() {
         return type;
@@ -26,7 +27,7 @@ public abstract class Tip {
     }
     
     public String[] getFieldNames(){
-        return fieldNames;
+        return fieldNames.toArray(new String[0]);
     }
     
     public String getName(){
@@ -52,4 +53,12 @@ public abstract class Tip {
         return s;
     }
 
+    protected final void addField(Field f){
+        if (fields == null)
+            fields = new HashMap<>();
+        if (fieldNames == null)
+            fieldNames = new ArrayList<>();
+        fields.put(f.getName(), f);
+        fieldNames.add(f.getName());
+    }
 }
