@@ -11,8 +11,10 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import readingtipslibrary.dao.DaoService;
 
 /**
@@ -23,79 +25,60 @@ public class Stepdefs {
 
     private App app;
     private StubIO io;
-    private DaoService daoService;
 
     private List<String> input = new ArrayList<>();
 
-    @Given("^command insert and type video tip is selected$")
-    public void commandInsertTipAndTypeVideoIsSelected() {
-        insert("video");
+    @Given("^command \"([^\"]*)\" and type \"([^\"]*)\" is selected$")
+    public void commandAndTypeIsSelected(String command, String type) {
+        switch (command) {
+            case "insert":
+                insert(type);
+                break;
+            case "find-type":
+                findType(type);
+                break;
+            default:
+                throw new IllegalArgumentException("Illegal type entered.");
+        }
     }
 
-    @Given("^command insert tip and type book is selected$")
-    public void commandInsertTipAndTypeBookIsSelected() {
-        insert("book");
-    }
-
-    @Given("^command insert tip and type podcast is selected$")
-    public void commandInsertTipAndTypePodcastIsSelected() {
-        insert("podcast");
-    }
-
-    @Given("^command insert tip and type blogpost is selected$")
-    public void commandInsertTipAndTypeBlogpostIsSelected() {
-        insert("blogpost");
-    }
-
-    @Given("^command find-all is selected$")
-    public void commandFindAllIsSelected() {
-        input.add("find-all");
-    }
-
-    @When("^title \"([^\"]*)\" and url \"([^\"]*)\" are entered$")
-    public void titleAndUrlAreEntered(String title, String url) throws ClassNotFoundException, Exception {
-        addAndQuit(title, url);
-    }
-
-    @When("^author \"([^\"]*)\" and title \"([^\"]*)\" and isbn \"([^\"]*)\" are entered$")
-    public void authorAndTitleAndIsbnAreEntered(String author, String title, String isbn) throws ClassNotFoundException, Exception {
-        addAndQuit(author, title, isbn);
+    @Given("^command \"([^\"]*)\" is selected$")
+    public void commandFindAllIsSelected(String command) {
+        addParameters(command);
     }
     
-    @When("^podcastName \"([^\"]*)\" and title \"([^\"]*)\" and description \"([^\"]*)\" are entered$")
-    public void podcastNameAndTitleAndDescriptionAreEntered(String podcastName, String title, String description) throws ClassNotFoundException, Exception {
-        addAndQuit(podcastName, title, description);
+    @When("^type \"([^\"]*)\" is entered$")
+    public void typeIsEntered(String type) {
+        addParameters(type);
     }
 
-    @When("^author \"([^\"]*)\" and title \"([^\"]*)\" and url \"([^\"]*)\" are entered$")
-    public void authorAndTitleAndUrlAreEntered(String author, String title, String url) throws ClassNotFoundException, Exception {
-        addAndQuit(author, title, url);
+    @When("^title \"([^\"]*)\" and description \"([^\"]*)\" and url \"([^\"]*)\" are entered$")
+    public void titleAndUrlAreEntered(String title, String description, String url) throws Exception {
+        addParameters(title, description, url);
+    }
+
+    @When("^author \"([^\"]*)\" and title \"([^\"]*)\" and isbn \"([^\"]*)\" and description \"([^\"]*)\" and url \"([^\"]*)\" are entered$")
+    public void authorAndTitleAndIsbnAndDescriptionAndUrlAreEntered(String author, String title, String isbn, String description, String url) throws Exception {
+        addParameters(author, title,isbn, description, url);
+    }
+    
+        @When("^name \"([^\"]*)\" and title \"([^\"]*)\" and description \"([^\"]*)\" and url \"([^\"]*)\" are entered$")
+    public void nameAndTitleAndDescriptionAreEntered(String name, String title, String description, String url) throws Exception {
+        addParameters(name, title, description, url);
+    }
+    
+    @When("^author \"([^\"]*)\" and title \"([^\"]*)\" and description \"([^\"]*)\" and url \"([^\"]*)\" are entered$")
+    public void authorAndTitleAndDescriptionAreEntered(String name, String title, String description, String url) throws Exception {
+        addParameters(name, title, description, url);
     }
 
     @Then("^system will respond with \"([^\"]*)\" message$")
-    public void systemWillRespondWith(String expected) {
-        assertFalse(io.getPrints().contains(expected));
+    public void systemWillRespondWith(String expected) throws Exception {
+        runTestCase();
+        assertTrue(io.getPrints().contains(expected));
     }
 
-    private void insert(String type) {
-        input.add("insert");
-        input.add("type");
-    }
-
-    private void addAndQuit(String x, String y, String z) throws ClassNotFoundException, Exception {
-        input.add(x);
-        input.add(y);
-        input.add(z);
-        input.add("quit");
-        io = new StubIO(input);
-        app = new App();
-        app.init(io);
-        app.run();
-    }
-
-    private void addAndQuit(String x, String y) throws ClassNotFoundException, Exception {
-        input.add(x);
-        input.add(y);
+    private void runTestCase() throws Exception {
         input.add("quit");
         io = new StubIO(input);
         app = new App();
@@ -103,14 +86,19 @@ public class Stepdefs {
         app.run();
     }
     
-        private void addDontQuit(String firstArg, String secondArg, String thirdArg, String fourthArg) throws ClassNotFoundException, Exception {
-        input.add(firstArg);
-        input.add(secondArg);
-        input.add(thirdArg);
-        input.add(fourthArg);
-        io = new StubIO(input);
-        app = new App();
-        app.init(io);
-        app.run();
+    private void insert(String type) {
+        addParameters("insert", type);
+    }
+
+    private void findType(String type) {
+        addParameters("find-type", type);
+    }
+    
+    private void deleteType(String type) {
+        addParameters("delete-type");
+    }
+
+    private void addParameters(String...parameters) {
+        input.addAll(Arrays.asList(parameters));
     }
 }

@@ -121,7 +121,7 @@ public class App {
 
     private void deleteType(String type) {
         if (daoService.deleteAll(type)) {
-            io.print("Deleting all " + type + "s succesful!");
+            io.print("Deleting all " + type + "s successful!");
         } else {
             io.print("There was a problem with deleting all " + type + "s.");
         }

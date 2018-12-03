@@ -16,7 +16,7 @@ public class Podcast extends Tip {
      public Podcast(){
         type = new TypeField();
         type.setContent("podcast");
-        String[] genericFields = new String[]{"author", "title", "description"};
+        String[] genericFields = new String[]{"name", "title", "description"};
         for (String s : genericFields){
             addField(new GenericField(s));
         }
