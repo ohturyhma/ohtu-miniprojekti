@@ -74,23 +74,14 @@ public class TipTest {
     @Test
     public void urlFieldTest() {
         UrlField url = new UrlField();
-        String valid1 = "https://web.telegram.org/#/im?p=@ohjelmistotuotanto";
-        String valid2= "www.github.com/ohturyhma";
-        String valid3= "http://math.aalto.fi/opetus/sovtoda/oppikirja/TodLaskJakaumat.pdf";
-        String valid4= "github.com/ohturyhma";
-        String valid5 = "pekka.fi";
-        String unvalid1 = "";
-        String unvalid2 = "pekka";
-        String unvalid3 = "pekka.f";
-        String unvalid4 = "pekka.fi9";
-        assertTrue(url.isValidContent(valid1));
-        assertTrue(url.isValidContent(valid2));
-        assertTrue(url.isValidContent(valid3));
-        assertTrue(url.isValidContent(valid4));
-        assertTrue(url.isValidContent(valid5));
-        assertFalse(url.isValidContent(unvalid1));
-        assertFalse(url.isValidContent(unvalid2));
-        assertFalse(url.isValidContent(unvalid3));
-        assertFalse(url.isValidContent(unvalid4));
+        assertTrue(url.isValidContent("https://web.telegram.org/#/im?p=@ohjelmistotuotanto"));
+        assertTrue(url.isValidContent("www.github.com/ohturyhma"));
+        assertTrue(url.isValidContent("http://math.aalto.fi/opetus/sovtoda/oppikirja/TodLaskJakaumat.pdf"));
+        assertTrue(url.isValidContent("github.com/ohturyhma"));
+        assertTrue(url.isValidContent("pekka.fi"));
+        assertTrue(url.isValidContent(""));
+        assertFalse(url.isValidContent("pekka"));
+        assertFalse(url.isValidContent("pekka.f"));
+        assertFalse(url.isValidContent("pekka.fi9"));
     }
 }
