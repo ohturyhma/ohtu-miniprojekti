@@ -5,8 +5,6 @@
  */
 package readingtipslibrary.app;
 
-import java.util.Scanner;
-
 /**
  *
  * @author strajama

@@ -36,7 +36,7 @@ public class App {
 
         while (!quit) {
             System.out.println();
-            io.print("Commands: insert, find-type, find-all, delete-type, delete-all, quit");
+            io.print("Commands: insert, find-by-name, find-type, find-all, delete-type, delete-all, quit");
             String command = io.readLine("Enter command: ");
 
             switch (command) {
@@ -48,6 +48,18 @@ public class App {
                         findAll();
                     }
                     break;
+                    
+                
+                case "find-by-name":
+
+                    String name = io.readLine("Enter the name: (You can also search for 'Excalibur' by entering 'Exc'");
+
+                    List<Tip> list = new ArrayList<>();
+                    for (String s : TypeField.POSSIBLE_TYPES) {
+                        list.addAll(daoService.findByName(name, s));
+                    }
+                    printListOfTips(list);
+
 
                 case "find-all":
                     findAll();
@@ -144,5 +156,11 @@ public class App {
         }
         io.print("Every "+type+" found.");
         System.out.println();
+    }
+    
+    private void printListOfTips(List<Tip> list) {
+        for (Tip tip : list) {
+            io.print(tip.toString());
+        }
     }
 }

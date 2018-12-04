@@ -6,15 +6,18 @@
 package readingtipslibrary;
 
 import java.sql.SQLException;
+import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import readingtipslibrary.dao.Database;
+import readingtipslibrary.dao.TipDao;
 import readingtipslibrary.domain.Blogpost;
 import readingtipslibrary.domain.Book;
 import readingtipslibrary.domain.Podcast;
+import readingtipslibrary.domain.Tip;
 import readingtipslibrary.domain.Video;
 
 /**
@@ -24,12 +27,14 @@ import readingtipslibrary.domain.Video;
 public class DaoTest {
 
     private Database database;
+    private TipDao tipDao;
 
     @Before
     public void setUp() throws Exception {
 
         database = new Database("jdbc:sqlite:test.db");
         database.init();
+        tipDao = new TipDao(database);
     }
 
     @Test
@@ -39,7 +44,19 @@ public class DaoTest {
     }
 
     @Test
-    public void blogDaoTest() throws SQLException {
+    public void findByNameTestReturnsCorrectBook() throws SQLException {
+        Tip tip = Tip.tipFromType("book");
+        tip.getField("author").setContent("J.K.Rowlings");
+        tip.getField("title").setContent("Philosophers stone");
+        tip.getField("isbn").setContent("123-123-123");
+        tip.getField("description").setContent("Harry pottah");
+        tip.getField("url").setContent("www.PorryHattah.com");
+        
+        tipDao.insert(tip);
+        
+        List<Tip> list = tipDao.findByName("Phi", "book");
+        assertEquals(tip.getField("title").getContent(), list.get(0).getField("title").getContent());
+
         //
     }
 

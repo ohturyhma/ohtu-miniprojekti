@@ -21,6 +21,18 @@ public class DaoService {
     public DaoService(Database database) {
         this.tipDao = new TipDao(database);
     }
+    
+    public List<Tip> findByName(String name, String type) {
+        List<Tip> tips = new ArrayList<>();
+        
+        try {
+            tips = tipDao.findByName(name, type);
+        } catch (SQLException e) {
+            return tips;
+        }
+
+        return tips;
+    }
 
     public boolean insert(Tip tip) {
         try {
