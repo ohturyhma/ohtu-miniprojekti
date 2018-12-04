@@ -46,7 +46,7 @@ public class Stepdefs {
     public void commandFindAllIsSelected(String command) {
         addParameters(command);
     }
-    
+
     @When("^type \"([^\"]*)\" is entered$")
     public void typeIsEntered(String type) {
         addParameters(type);
@@ -59,17 +59,22 @@ public class Stepdefs {
 
     @When("^author \"([^\"]*)\" and title \"([^\"]*)\" and isbn \"([^\"]*)\" and description \"([^\"]*)\" and url \"([^\"]*)\" are entered$")
     public void authorAndTitleAndIsbnAndDescriptionAndUrlAreEntered(String author, String title, String isbn, String description, String url) throws Exception {
-        addParameters(author, title,isbn, description, url);
+        addParameters(author, title, isbn, description, url);
     }
-    
-        @When("^name \"([^\"]*)\" and title \"([^\"]*)\" and description \"([^\"]*)\" and url \"([^\"]*)\" are entered$")
+
+    @When("^name \"([^\"]*)\" and title \"([^\"]*)\" and description \"([^\"]*)\" and url \"([^\"]*)\" are entered$")
     public void nameAndTitleAndDescriptionAreEntered(String name, String title, String description, String url) throws Exception {
         addParameters(name, title, description, url);
     }
-    
+
     @When("^author \"([^\"]*)\" and title \"([^\"]*)\" and description \"([^\"]*)\" and url \"([^\"]*)\" are entered$")
     public void authorAndTitleAndDescriptionAreEntered(String name, String title, String description, String url) throws Exception {
         addParameters(name, title, description, url);
+    }
+    
+    @When("^type all is entered$")
+    public void typeAllIsEntered() {
+        addParameters("book","video","podcast","blogpost");
     }
 
     @Then("^system will respond with \"([^\"]*)\" message$")
@@ -85,7 +90,7 @@ public class Stepdefs {
         app.init(io);
         app.run();
     }
-    
+
     private void insert(String type) {
         addParameters("insert", type);
     }
@@ -93,12 +98,12 @@ public class Stepdefs {
     private void findType(String type) {
         addParameters("find-type", type);
     }
-    
+
     private void deleteType(String type) {
         addParameters("delete-type");
     }
 
-    private void addParameters(String...parameters) {
+    private void addParameters(String... parameters) {
         input.addAll(Arrays.asList(parameters));
     }
 }

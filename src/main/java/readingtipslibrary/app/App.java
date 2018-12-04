@@ -131,6 +131,7 @@ public class App {
         for (String s : TypeField.POSSIBLE_TYPES) {
             findType(s);
         }
+        io.print("Everything found.");
     }
 
     private void findType(String type) {
@@ -139,6 +140,7 @@ public class App {
         for (Tip tip : allFromType) {
             io.print(tip.toString());
         }
+        io.print("Every "+type+" found.");
         System.out.println();
     }
 }
