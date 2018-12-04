@@ -22,6 +22,7 @@ public class Book extends Tip {
             addField(new GenericField(s));
         }
         addField(new UrlField());
+        addField(new IdField());
     }
 }
 /*

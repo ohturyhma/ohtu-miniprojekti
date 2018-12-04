@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import readingtipslibrary.domain.Tip;
 
@@ -92,7 +93,11 @@ public class TipDao {
         String statementString = "INSERT INTO " + table + "(";
 //        String statementString = "INSERT INTO " + t.getType().getContent() + "s (";
         String[] fieldNames = t.getFieldNames();
+        
+        
+
         for (int i = 0; i < fieldNames.length; ++i) {
+
             if (i != 0) {
                 statementString += ", ";
             }

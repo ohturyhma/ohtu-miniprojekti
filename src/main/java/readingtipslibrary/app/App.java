@@ -41,7 +41,7 @@ public class App {
 
             switch (command) {
                 case "find-type":
-                    String typeToFind = io.readLine("What do you want to find? (book, blog, podcast, video or all)");
+                    String typeToFind = io.readLine("What do you want to find? (book, blogpost, podcast, video or all)");
                     if (!typeToFind.equals("all")) {
                         findType(typeToFind);
                     } else {
@@ -53,7 +53,7 @@ public class App {
                     findAll();
                     break;
                 case "insert":
-                    String type = io.readLine("What do you want to insert? (book, blog, podcast, video): ");
+                    String type = io.readLine("What do you want to insert? (book, blogpost, podcast, video): ");
 
                     boolean valid = false;
                     for (String s : TypeField.POSSIBLE_TYPES) {
@@ -67,6 +67,7 @@ public class App {
                     String s;
                     boolean loop;
                     for (String field : t.getFieldNames()) {
+                        if (field.equals("id")) continue;
                         loop = true;
                         while (loop) {
                             s = io.readLine(t.getField(field).toString() + "?");
@@ -84,7 +85,7 @@ public class App {
                     }
                     break;
                 case "delete-type":
-                    type = io.readLine("What type of tips do you want to delete? Command deletes all of them. (book, blog, podcast, video or all): ");
+                    type = io.readLine("What type of tips do you want to delete? Command deletes all of them. (book, blogpost, podcast, video or all): ");
 
                     if (type.equals("all")) {
                         deleteAll();
