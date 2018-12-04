@@ -59,7 +59,7 @@ public class App {
                         list.addAll(daoService.findByName(name, s));
                     }
                     printListOfTips(list);
-
+                    break;
 
                 case "find-all":
                     findAll();

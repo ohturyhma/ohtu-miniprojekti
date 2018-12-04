@@ -52,11 +52,21 @@ public class DaoTest {
         tip.getField("description").setContent("Harry pottah");
         tip.getField("url").setContent("www.PorryHattah.com");
         
+        Tip tip1 = Tip.tipFromType("book");
+        tip1.getField("author").setContent("J.K.Rowlings");
+        tip1.getField("title").setContent("Harry pottah");
+        tip1.getField("isbn").setContent("123-123-123");
+        tip1.getField("description").setContent("Harry pottah");
+        tip1.getField("url").setContent("www.PorryHattah.com");
+        
         tipDao.insert(tip);
+        tipDao.insert(tip1);
         
         List<Tip> list = tipDao.findByName("Phi", "book");
         assertEquals(tip.getField("title").getContent(), list.get(0).getField("title").getContent());
-
+        assertEquals(1, list.size());
+        tipDao.deleteAll("book");
+        
         //
     }
 
