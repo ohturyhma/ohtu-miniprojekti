@@ -58,6 +58,7 @@ public class App {
                     for (String s : TypeField.POSSIBLE_TYPES) {
                         list.addAll(daoService.findByName(name, s));
                     }
+                    io.print("Found " + list.size() + " entries.");
                     printListOfTips(list);
                     break;
 

@@ -42,14 +42,51 @@ public class Stepdefs {
         }
     }
 
+    @Given("^database has tip of type \"([^\"]*)\" and name \"([^\"]*)\"")
+    public void databaseHasTipOfTypeAndName(String type, String name) throws Exception {
+        commandAndTypeIsSelected("insert", type);
+        switch (type) {
+            case "book":
+                authorAndTitleAndIsbnAndDescriptionAndUrlAreEntered("author", name, "isbn", "description", "https://someurl.com");
+                runTestCase();
+                break;
+            case "blogpost":
+                authorAndTitleAndDescriptionAreEntered("author", name, "description", "https://someurl.com");
+                runTestCase();
+                break;
+            case "podcast":
+                authorAndTitleAndDescriptionAreEntered("author", name, "description", "https://someurl.com");
+                runTestCase();
+                break;
+            case "video":
+                titleAndUrlAreEntered(name, "description", "https://someurl.com");
+                runTestCase();
+                break;
+        }
+        authorAndTitleAndIsbnAndDescriptionAndUrlAreEntered("author", name, "isbn", "description", "https://someurl.com");
+        runTestCase();
+    }
+
+    @Given("^database has 3 tips with the word comp in their name")
+    public void databaseHasTipsWithWord() throws Exception {
+        databaseHasTipOfTypeAndName("book", "Introduction to the Theory of Computation");
+        databaseHasTipOfTypeAndName("video", "How to avoid compromising your mission");
+        databaseHasTipOfTypeAndName("blogpost", "About computers");
+    }
+
     @Given("^command \"([^\"]*)\" is selected$")
-    public void commandFindAllIsSelected(String command) {
+    public void commandIsSelected(String command) {
         addParameters(command);
     }
 
     @When("^type \"([^\"]*)\" is entered$")
     public void typeIsEntered(String type) {
         addParameters(type);
+    }
+
+    @When("^name \"([^\"]*)\" is entered$")
+    public void nameIsEntered(String name) {
+        addParameters(name);
     }
 
     @When("^title \"([^\"]*)\" and description \"([^\"]*)\" and url \"([^\"]*)\" are entered$")
@@ -71,16 +108,17 @@ public class Stepdefs {
     public void authorAndTitleAndDescriptionAreEntered(String name, String title, String description, String url) throws Exception {
         addParameters(name, title, description, url);
     }
-    
+
     @When("^type all is entered$")
     public void typeAllIsEntered() {
-        addParameters("book","video","podcast","blogpost");
+        addParameters("book", "video", "podcast", "blogpost");
     }
 
     @Then("^system will respond with \"([^\"]*)\" message$")
     public void systemWillRespondWith(String expected) throws Exception {
         runTestCase();
         assertTrue(io.getPrints().contains(expected));
+        emptyDatabase();
     }
 
     private void runTestCase() throws Exception {
@@ -89,6 +127,7 @@ public class Stepdefs {
         app = new App();
         app.init(io);
         app.run();
+        input = new ArrayList<>();
     }
 
     private void insert(String type) {
@@ -99,11 +138,13 @@ public class Stepdefs {
         addParameters("find-type", type);
     }
 
-    private void deleteType(String type) {
-        addParameters("delete-type");
-    }
-
     private void addParameters(String... parameters) {
         input.addAll(Arrays.asList(parameters));
+    }
+
+    private void emptyDatabase() throws Exception {
+        commandIsSelected("delete-all");
+        typeAllIsEntered();
+        runTestCase();
     }
 }
