@@ -82,6 +82,7 @@ public class TipTest {
         String unvalid1 = "";
         String unvalid2 = "pekka";
         String unvalid3 = "pekka.f";
+        String unvalid4 = "pekka.fi9";
         assertTrue(url.isValidContent(valid1));
         assertTrue(url.isValidContent(valid2));
         assertTrue(url.isValidContent(valid3));
@@ -90,5 +91,6 @@ public class TipTest {
         assertFalse(url.isValidContent(unvalid1));
         assertFalse(url.isValidContent(unvalid2));
         assertFalse(url.isValidContent(unvalid3));
+        assertFalse(url.isValidContent(unvalid4));
     }
 }

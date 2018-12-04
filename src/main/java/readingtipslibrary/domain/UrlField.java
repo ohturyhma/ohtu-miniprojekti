@@ -21,7 +21,7 @@ public class UrlField extends Field {
     @Override
     public boolean isValidContent(String content) {
         //Pattern to check if this is a valid URL address
-        Pattern p = Pattern.compile("^(http://|https://)?(www.)?\\w+.\\w*[.]\\w{2,63}[/]*\\S*"); //?(www.)?(/w)+.(/w)*.(/w){2-63}/?$");
+        Pattern p = Pattern.compile("^(http://|https://)?(www.)?\\w+.\\w*[.][a-zA-Z]{2,63}($|[/]\\S*)"); //?(www.)?(/w)+.(/w)*.(/w){2-63}/?$");
         Matcher m;
         m = p.matcher(content);
         return m.matches();
