@@ -19,3 +19,8 @@ Feature: As a user I can delete tips
     Given command "delete-type" is selected
     When type "podcast" is entered
     Then system will respond with "Deleting all podcasts successful!" message
+
+  Scenario: tip destruction is successful with all tips
+    Given command "delete-all" is selected
+    When type all is entered
+    Then system will respond with "Everything deleted!" message

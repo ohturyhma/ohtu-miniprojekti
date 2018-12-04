@@ -117,6 +117,7 @@ public class App {
         for (String s : TypeField.POSSIBLE_TYPES) {
             deleteType(s);
         }
+        io.print("Everything deleted!");
     }
 
     private void deleteType(String type) {
