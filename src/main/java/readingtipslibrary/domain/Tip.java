@@ -61,4 +61,6 @@ public abstract class Tip {
         fields.put(f.getName(), f);
         fieldNames.add(f.getName());
     }
+    
+    
 }
