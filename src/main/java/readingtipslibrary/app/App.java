@@ -149,11 +149,27 @@ public class App {
     }
 
     private void findType(String type) {
+        boolean legitInput = false;
+        for (String s : TypeField.POSSIBLE_TYPES) {
+            legitInput = s.equalsIgnoreCase(s);
+            if (legitInput)
+                break;
+        }
+        if (!legitInput){
+            io.print("'" + type + "' is not a valid type.");
+            return;
+        }
         List<Tip> allFromType = daoService.findAll(type);
-        io.print(type + "s:");
+        io.print(type.substring(0,1).toUpperCase()+ type.substring(1) + "s:");
+        io.print("-----------------------------------");
+        int tipsAdded = 0;
         for (Tip tip : allFromType) {
             io.print(tip.toString());
+            tipsAdded++;
+            if (tipsAdded < allFromType.size())
+                System.out.println();
         }
+        io.print("-----------------------------------");
         io.print("Every "+type+" found.");
         System.out.println();
     }

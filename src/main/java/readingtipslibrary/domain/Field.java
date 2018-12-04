@@ -20,7 +20,7 @@ public abstract class Field {
     }
 
     public String nameContentPrint(){
-        return toString() + getContent() + "\n";
+        return toString() + getContent();
     }
     
     public String getName() {

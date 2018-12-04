@@ -47,8 +47,12 @@ public abstract class Tip {
     @Override
     public String toString(){
         String s = "";
+        int fieldsAdded = 0;
         for(Field f : fields.values()){
             s += f.nameContentPrint();
+            fieldsAdded++;
+            if (fieldsAdded < fields.size())
+                s += "\n"; 
         }
         return s;
     }

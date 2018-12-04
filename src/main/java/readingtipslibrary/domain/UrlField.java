@@ -24,6 +24,6 @@ public class UrlField extends Field {
         Pattern p = Pattern.compile("^(http://|https://)?(www.)?\\w+.\\w*[.][a-zA-Z]{2,63}($|[/]\\S*)"); //?(www.)?(/w)+.(/w)*.(/w){2-63}/?$");
         Matcher m;
         m = p.matcher(content);
-        return m.matches();
+        return m.matches() || content.equals("");
     }
 }
