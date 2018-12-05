@@ -130,7 +130,7 @@ public class TipDao {
         stmt.close();
         connection.close();
     }
-    
+    // kesken
     public boolean deleteById(String type, int id) throws SQLException {
         String table = getTableName(type);
         if (isFoundById(id, type)) {
