@@ -51,10 +51,7 @@ public class TipDao {
         rs.close();
         stmt.close();
         connection.close();
-
-        
-        
-        
+ 
         return tips;
     }
 
@@ -133,9 +130,21 @@ public class TipDao {
         stmt.close();
         connection.close();
     }
+    
+    public boolean deleteById(String type, int id) throws SQLException {
+        String table = getTableName(type);
+        if (isFoundById(id, type)) {
+            Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM " + table +" WHERE id=?");
+        stmt.setObject(1, id);
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
+        return true;
+        }
+        return false;
+    }
 
-    
-    
     
     private String getTableName(String type) throws SQLException {
         String table;
@@ -156,5 +165,16 @@ public class TipDao {
                 throw new SQLException("unexpected value provided for table name");
         }
         
+    }
+    
+    private boolean isFoundById(int id, String type) throws SQLException {
+        String table = getTableName(type);
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM " + table + " WHERE id=?");
+        stmt.setObject(1, id);
+        ResultSet rs = stmt.executeQuery();
+        stmt.close();
+        connection.close();
+        return rs.wasNull();
     }
 }
