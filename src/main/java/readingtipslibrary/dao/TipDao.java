@@ -167,14 +167,5 @@ public class TipDao {
         
     }
     
-    private boolean isFoundById(int id, String type) throws SQLException {
-        String table = getTableName(type);
-        Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM " + table + " WHERE id=?");
-        stmt.setObject(1, id);
-        ResultSet rs = stmt.executeQuery();
-        stmt.close();
-        connection.close();
-        return rs.wasNull();
-    }
+
 }
