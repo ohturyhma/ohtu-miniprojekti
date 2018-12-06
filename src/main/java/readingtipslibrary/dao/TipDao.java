@@ -126,11 +126,7 @@ public class TipDao {
         stmt.close();
         connection.close();
     }
-<<<<<<< HEAD
 
-=======
-    // kesken
->>>>>>> 79d3075b30ebf50e5515da363233e8bf00ed9b43
     public boolean deleteById(String type, int id) throws SQLException {
         String table = getTableName(type);
         Connection connection = database.getConnection();
