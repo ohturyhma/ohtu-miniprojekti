@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import readingtipslibrary.domain.Tip;
 
@@ -25,17 +24,17 @@ public class TipDao {
     public TipDao(Database database) {
         this.database = database;
     }
-    
+
     public List<Tip> findByName(String name, String type) throws SQLException {
         Tip t;
-        
+
         String table = getTableName(type);
 
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM " + table + " WHERE title LIKE ?");// + type + "s");
-        name = "%"+name+"%";
+        name = "%" + name + "%";
         stmt.setObject(1, name);
-        
+
         List<Tip> tips = new ArrayList<>();
 
         ResultSet rs = stmt.executeQuery();
@@ -51,7 +50,7 @@ public class TipDao {
         rs.close();
         stmt.close();
         connection.close();
- 
+
         return tips;
     }
 
@@ -85,14 +84,11 @@ public class TipDao {
     public Tip insert(Tip t) throws SQLException {
 
         String table = getTableName(t.getType().getContent());
-        
 
         Connection connection = database.getConnection();
         String statementString = "INSERT INTO " + table + "(";
 //        String statementString = "INSERT INTO " + t.getType().getContent() + "s (";
         String[] fieldNames = t.getFieldNames();
-        
-        
 
         for (int i = 0; i < fieldNames.length; ++i) {
 
@@ -130,22 +126,46 @@ public class TipDao {
         stmt.close();
         connection.close();
     }
-    
+
     public boolean deleteById(String type, int id) throws SQLException {
         String table = getTableName(type);
-        if (isFoundById(id, type)) {
-            Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("DELETE FROM " + table +" WHERE id=?");
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM " + table + " WHERE id=?");
         stmt.setObject(1, id);
-        stmt.executeUpdate();
+        int r = stmt.executeUpdate();
         stmt.close();
         connection.close();
-        return true;
-        }
-        return false;
+        return r == 1;
+    }
+//kesken
+    public boolean editById(String type, int id, String column, String newContent) throws SQLException {
+        String table = getTableName(type);
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("UPDATE " + table + " SET "+column+"=? WHERE id=?");
+        stmt.setObject(1, newContent);
+        stmt.setObject(2, id);
+        int r = stmt.executeUpdate();
+        stmt.close();
+        connection.close();
+        return r == 1;
     }
 
-    
+    public Tip findById(String type, int id) throws SQLException {
+        String table = getTableName(type);
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM " + table + " WHERE id=?");
+        stmt.setObject(1, id);
+        ResultSet rs = stmt.executeQuery();
+        Tip tip = Tip.tipFromType(type);
+        for (String s : tip.getFieldNames()) {
+            tip.getField(s).setContent(rs.getString(s));
+        }
+        rs.close();
+        stmt.close();
+        connection.close();
+        return tip;
+    }
+
     private String getTableName(String type) throws SQLException {
         String table;
         switch (type) {
@@ -164,17 +184,8 @@ public class TipDao {
             default:
                 throw new SQLException("unexpected value provided for table name");
         }
-        
+
     }
     
-    private boolean isFoundById(int id, String type) throws SQLException {
-        String table = getTableName(type);
-        Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM " + table + " WHERE id=?");
-        stmt.setObject(1, id);
-        ResultSet rs = stmt.executeQuery();
-        stmt.close();
-        connection.close();
-        return rs.wasNull();
-    }
+
 }

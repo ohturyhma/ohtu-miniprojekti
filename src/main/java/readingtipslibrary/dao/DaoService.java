@@ -21,10 +21,10 @@ public class DaoService {
     public DaoService(Database database) {
         this.tipDao = new TipDao(database);
     }
-    
+
     public List<Tip> findByName(String name, String type) {
         List<Tip> tips = new ArrayList<>();
-        
+
         try {
             tips = tipDao.findByName(name, type);
         } catch (SQLException e) {
@@ -43,10 +43,10 @@ public class DaoService {
 
         return true;
     }
-    
+
     public List<Tip> findAll(String type) {
         List<Tip> tips = new ArrayList<>();
-        
+
         try {
             tips = tipDao.findAll(type);
         } catch (SQLException e) {
@@ -56,7 +56,7 @@ public class DaoService {
         return tips;
 
     }
-    
+
     public boolean deleteAll(String type) {
         try {
             tipDao.deleteAll(type);
@@ -64,5 +64,35 @@ public class DaoService {
             return false;
         }
         return true;
+    }
+
+    public boolean deleteById(String type, int id) {
+        boolean r = false;
+        try {
+            r = tipDao.deleteById(type, id);
+        } catch (SQLException e) {
+            return false;
+        }
+        return r;
+    }
+
+    public Tip findById(String type, int id) {
+        Tip tip;
+        try {
+            tip = tipDao.findById(type, id);
+        } catch (SQLException e) {
+            return null;
+        }
+        return tip;
+    }
+    
+    public boolean editById(String type, int id, String column, String newContent){
+        boolean r = false;
+        try {
+            r=tipDao.editById(type, id, column, newContent);
+        } catch (SQLException e) {
+            return false;
+        }
+        return r;
     }
 }

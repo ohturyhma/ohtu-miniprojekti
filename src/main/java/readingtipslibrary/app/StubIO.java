@@ -33,8 +33,8 @@ public class StubIO implements IO {
     }
 
     @Override
-    public String readLine(String prompt) {
-        print(prompt);
+    public String readLine(String line) {
+        print(line);
         if (i < lines.size()) {
             return lines.get(i++);
         }
@@ -48,5 +48,19 @@ public class StubIO implements IO {
 
     public ArrayList<String> getPrints() {
         return prints;
+    }
+/**
+ * 
+ * @param line
+ * @return given line as a id-number or 0
+ */
+    @Override
+    public int readInt(String line) {
+        print(line);
+        String test = lines.get(i++);
+        if (test.matches("^[1-9][0-9]*$")) {
+            return Integer.parseInt(test);
+        }
+        return 0;
     }
 }

@@ -13,7 +13,7 @@ import readingtipslibrary.dao.Database;
  * Class is for using application. It's link between Service-classes and App
  */
 public class ConsoleIO implements IO {
-    
+
     private Scanner input;
     private Database database;
 
@@ -22,7 +22,6 @@ public class ConsoleIO implements IO {
         this.database = new Database("jdbc:sqlite:readingtips.db");
         database.init();
     }
-    
 
     @Override
     public void print(String toPrint) {
@@ -39,7 +38,20 @@ public class ConsoleIO implements IO {
     public Database getDatabase() {
         return database;
     }
-    
-    
-    
+
+    /**
+     *
+     * @param line
+     * @return given line as a id-number or 0
+     */
+    @Override
+    public int readInt(String line) {
+        System.out.println(line);
+        String test = input.nextLine();
+        if (test.matches("^[1-9][0-9]*$")) {
+            return Integer.parseInt(test);
+        }
+        return 0;
+    }
+
 }

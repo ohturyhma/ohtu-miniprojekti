@@ -36,7 +36,7 @@ public class App {
 
         while (!quit) {
             System.out.println();
-            io.print("Commands: insert, find-by-name, find-type, find-all, delete-type, delete-all, quit");
+            io.print("Commands: insert, edit, find-by-name, find-type, find-all, delete-type, delete-all, delete-one, quit");
             String command = io.readLine("Enter command: ");
 
             switch (command) {
@@ -48,8 +48,7 @@ public class App {
                         findAll();
                     }
                     break;
-                    
-                
+
                 case "find-by-name":
 
                     String name = io.readLine("Enter the name: (You can also search for 'Excalibur' by entering 'Exc'");
@@ -65,8 +64,13 @@ public class App {
                 case "find-all":
                     findAll();
                     break;
+                case "edit":
+                    String type = io.readLine("What do you want to edit? (book, blogpost, podcast, video): ");
+                    int id = io.readInt("What id-number you want to edit?");
+                    edit(type, id);
+                    break;
                 case "insert":
-                    String type = io.readLine("What do you want to insert? (book, blogpost, podcast, video): ");
+                    type = io.readLine("What do you want to insert? (book, blogpost, podcast, video): ");
 
                     boolean valid = false;
                     for (String s : TypeField.POSSIBLE_TYPES) {
@@ -80,7 +84,9 @@ public class App {
                     String s;
                     boolean loop;
                     for (String field : t.getFieldNames()) {
-                        if (field.equals("id")) continue;
+                        if (field.equals("id")) {
+                            continue;
+                        }
                         loop = true;
                         while (loop) {
                             s = io.readLine(t.getField(field).toString() + "?");
@@ -117,6 +123,11 @@ public class App {
                 case "delete-all":
                     deleteAll();
                     break;
+                case "delete-one":
+                    type = io.readLine("What type of tip do you want to delete? (book, blogpost, podcast or video): ");
+                    id = io.readInt("What id-number you want to delete?");
+                    deleteById(type, id);
+                    break;
                 case "quit":
                     quit = true;
                     break;
@@ -142,6 +153,14 @@ public class App {
         }
     }
 
+    private void deleteById(String type, int id) {
+        if (daoService.deleteById(type, id)) {
+            io.print("Deleting " + type + " with id-number " + id + " was succesfull");
+        } else {
+            io.print("There was a problem with deleting.");
+        }
+    }
+
     private void findAll() {
         for (String s : TypeField.POSSIBLE_TYPES) {
             findType(s);
@@ -153,31 +172,62 @@ public class App {
         boolean legitInput = false;
         for (String s : TypeField.POSSIBLE_TYPES) {
             legitInput = s.equalsIgnoreCase(s);
-            if (legitInput)
+            if (legitInput) {
                 break;
+            }
         }
-        if (!legitInput){
+        if (!legitInput) {
             io.print("'" + type + "' is not a valid type.");
             return;
         }
         List<Tip> allFromType = daoService.findAll(type);
-        io.print(type.substring(0,1).toUpperCase()+ type.substring(1) + "s:");
+        io.print(type.substring(0, 1).toUpperCase() + type.substring(1) + "s:");
         io.print("-----------------------------------");
         int tipsAdded = 0;
         for (Tip tip : allFromType) {
             io.print(tip.toString());
             tipsAdded++;
-            if (tipsAdded < allFromType.size())
+            if (tipsAdded < allFromType.size()) {
                 System.out.println();
+            }
         }
         io.print("-----------------------------------");
-        io.print("Every "+type+" found.");
+        io.print("Every " + type + " found.");
         System.out.println();
     }
-    
+
     private void printListOfTips(List<Tip> list) {
         for (Tip tip : list) {
             io.print(tip.toString());
+        }
+    }
+
+    private void edit(String type, int id) {
+        if (daoService.findById(type, id)==null) {
+            io.print("There was a problem in founding the tip for editing.");
+        } else {
+            Tip tip = daoService.findById(type, id);
+            io.print(tip.toString());
+            String editing = io.readLine("What do you want to edit?").toLowerCase();
+            boolean e = true;
+            for (String s : tip.getFieldNames()) {
+                if (s.equals(editing)) {
+                    e = false;
+                    break;
+                }
+            }
+            if (e) {
+                io.print("Given '"+editing+"' is not a valid field name.");
+            } else if (editing.equals("id")){
+                io.print("You can't edit id!");
+            } else {
+                String newS = io.readLine("Give a new content for the "+editing+".");
+                if (daoService.editById(type, id, editing, newS)) {
+                    io.print("Editing was successful!");
+                } else {
+                    io.print("Editing was not successful");
+                }
+            }
         }
     }
 }
