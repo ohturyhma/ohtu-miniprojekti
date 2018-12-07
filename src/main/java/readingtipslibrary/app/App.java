@@ -203,7 +203,7 @@ public class App {
     }
 
     private void edit(String type, int id) {
-        if (daoService.findById(type, id)==null) {
+        if (daoService.findById(type, id) == null) {
             io.print("There was a problem in founding the tip for editing.");
         } else {
             Tip tip = daoService.findById(type, id);
@@ -217,15 +217,22 @@ public class App {
                 }
             }
             if (e) {
-                io.print("Given '"+editing+"' is not a valid field name.");
-            } else if (editing.equals("id")){
+                io.print("Given '" + editing + "' is not a valid field name.");
+            } else if (editing.equals("id")) {
                 io.print("You can't edit id!");
             } else {
-                String newS = io.readLine("Give a new content for the "+editing+".");
-                if (daoService.editById(type, id, editing, newS)) {
-                    io.print("Editing was successful!");
+                String newS = io.readLine("Give a new content for the " + editing + ".");
+                if (tip.getField(editing).isValidContent(newS)) {
+                    if (daoService.editById(type, id, editing, newS)) {
+                        tip.getField(editing).setContent(newS);
+                        io.print(tip.toString());
+                        io.print("Editing was successful!");
+                    } else {
+                        io.print(tip.toString());
+                        io.print("Editing was not successful");
+                    }
                 } else {
-                    io.print("Editing was not successful");
+                    io.print("Given '"+newS+"' is not a valid content for "+editing+".");
                 }
             }
         }
