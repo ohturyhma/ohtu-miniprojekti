@@ -37,3 +37,5 @@ _Asennusohjeet:_
 * java -jar builds/libs/ohtu-miniprojekti-all.jar
 
 [Ohjelman toimintojen hyväksymiskriteerit](https://github.com/ohturyhma/ohtu-miniprojekti/blob/master/toimintojenkriteerit.md)
+
+

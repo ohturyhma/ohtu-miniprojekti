@@ -6,6 +6,7 @@
 package readingtipslibrary.app;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import readingtipslibrary.dao.DaoService;
 import readingtipslibrary.domain.Tip;
@@ -72,10 +73,7 @@ public class App {
                 case "insert":
                     type = io.readLine("What do you want to insert? (book, blogpost, podcast, video): ");
 
-                    boolean valid = false;
-                    for (String s : TypeField.POSSIBLE_TYPES) {
-                        valid = valid || type.equals(s);
-                    }
+                    boolean valid = Arrays.asList(TypeField.POSSIBLE_TYPES).contains(type);
                     if (!valid) {
                         io.print(type + " is not a valid type to insert.");
                         break;
