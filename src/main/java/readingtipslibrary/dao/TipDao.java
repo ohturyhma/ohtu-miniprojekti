@@ -35,39 +35,25 @@ public class TipDao {
         name = "%" + name + "%";
         stmt.setObject(1, name);
 
-        List<Tip> tips = new ArrayList<>();
-
-        ResultSet rs = stmt.executeQuery();
-
-        while (rs.next()) {
-            t = Tip.tipFromType(type);
-            for (String s : t.getFieldNames()) {
-                t.getField(s).setContent(rs.getString(s));
-            }
-            tips.add(t);
-        }
-
-        rs.close();
-        stmt.close();
-        connection.close();
-
-        return tips;
+        return readList(type, connection, stmt);
     }
 
     public List<Tip> findAll(String type) throws SQLException {
-
-        Tip t;
         String table = getTableName(type);
 
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM " + table);// + type + "s");
 
+        return readList(type, connection, stmt);
+    }
+
+    private List<Tip> readList(String type, Connection connection, PreparedStatement stmt) throws SQLException {
         List<Tip> tips = new ArrayList<>();
 
         ResultSet rs = stmt.executeQuery();
 
         while (rs.next()) {
-            t = Tip.tipFromType(type);
+            Tip t = Tip.tipFromType(type);
             for (String s : t.getFieldNames()) {
                 t.getField(s).setContent(rs.getString(s));
             }
