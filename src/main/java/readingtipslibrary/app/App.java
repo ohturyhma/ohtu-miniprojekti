@@ -133,6 +133,9 @@ public class App {
     private void selectRandomTip() {
         Tip tip = daoService.selectRandomTip();
         if (tip != null) {
+            System.out.println("");
+            io.purpleText(tip.getType().getContent());
+            io.whiteText("-----------------------------------");
             io.prompt(tip.toString());
         } else {
             io.prompt("No tips were found.");
