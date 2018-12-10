@@ -117,6 +117,7 @@ public class Stepdefs {
     @Then("^system will respond with \"([^\"]*)\" message$")
     public void systemWillRespondWith(String expected) throws Exception {
         runTestCase();
+        System.out.println(io.getPrints());
         assertTrue(io.getPrints().contains(expected));
         emptyDatabase();
     }

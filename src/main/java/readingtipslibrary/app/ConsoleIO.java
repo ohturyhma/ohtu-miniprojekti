@@ -16,6 +16,15 @@ public class ConsoleIO implements IO {
 
     private Scanner input;
     private Database database;
+    public static final String RESET = "\u001B[0m";
+    public static final String BLACK = "\u001B[30m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String WHITE = "\u001B[37m";
 
     public ConsoleIO() throws ClassNotFoundException {
         this.input = new Scanner(System.in);
@@ -24,8 +33,18 @@ public class ConsoleIO implements IO {
     }
 
     @Override
-    public void print(String toPrint) {
-        System.out.println(toPrint);
+    public void prompt(String toPrint) {
+        System.out.println(YELLOW + toPrint + RESET);
+    }
+
+    @Override
+    public void warn(String toPrint) {
+        System.out.println(RED + toPrint + RESET);
+    }
+
+    @Override
+    public void success(String toPrint) {
+        System.out.println(GREEN + toPrint + RESET);
     }
 
     @Override

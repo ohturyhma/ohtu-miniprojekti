@@ -28,13 +28,13 @@ public class StubIO implements IO {
     }
 
     @Override
-    public void print(String toPrint) {
+    public void prompt(String toPrint) {
         prints.add(toPrint);
     }
 
     @Override
     public String readLine(String line) {
-        print(line);
+        prompt(line);
         if (i < lines.size()) {
             return lines.get(i++);
         }
@@ -56,11 +56,21 @@ public class StubIO implements IO {
  */
     @Override
     public int readInt(String line) {
-        print(line);
+        prompt(line);
         String test = lines.get(i++);
         if (test.matches("^[1-9][0-9]*$")) {
             return Integer.parseInt(test);
         }
         return 0;
+    }
+
+    @Override
+    public void warn(String toPrint) {
+        prints.add(toPrint);
+    }
+
+    @Override
+    public void success(String toPrint) {
+        prints.add(toPrint);
     }
 }

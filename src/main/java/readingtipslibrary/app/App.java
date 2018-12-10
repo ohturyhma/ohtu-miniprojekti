@@ -11,6 +11,8 @@ import readingtipslibrary.dao.DaoService;
 import readingtipslibrary.domain.Tip;
 import readingtipslibrary.domain.TypeField;
 
+import static readingtipslibrary.app.Constants.*;
+
 /**
  *
  * @author strajama
@@ -36,12 +38,12 @@ public class App {
 
         while (!quit) {
             System.out.println();
-            io.print("Commands: insert, edit, find-by-name, find-type, find-all, delete-type, delete-all, delete-one, quit");
-            String command = io.readLine("Enter command: ");
+            io.prompt(COMMANDS_LIST);
+            String command = io.readLine(ENTER_COMMAND);
 
             switch (command) {
                 case "find-type":
-                    String typeToFind = io.readLine("What do you want to find? (book, blogpost, podcast, video or all)");
+                    String typeToFind = io.readLine(FIND_TYPE);
                     if (!typeToFind.equals("all")) {
                         findType(typeToFind);
                     } else {
@@ -51,90 +53,95 @@ public class App {
 
                 case "find-by-name":
 
-                    String name = io.readLine("Enter the name: (You can also search for 'Excalibur' by entering 'Exc'");
+                    String name = io.readLine(SEARCH_NAME);
 
                     List<Tip> list = new ArrayList<>();
                     for (String s : TypeField.POSSIBLE_TYPES) {
                         list.addAll(daoService.findByName(name, s));
                     }
-                    io.print("Found " + list.size() + " entries.");
-                    printListOfTips(list);
+                    if (list.isEmpty()) {
+                        io.prompt(FOUND_NOTHING);
+                    } else {
+                        io.prompt(String.format(FOUND_ENTRIES, list.size()));
+                        printListOfTips(list);
+                    }
                     break;
 
                 case "find-all":
                     findAll();
                     break;
                 case "edit":
-                    String type = io.readLine("What do you want to edit? (book, blogpost, podcast, video): ");
-                    int id = io.readInt("What id-number you want to edit?");
-                    edit(type, id);
+                    String userSelectedType = io.readLine(EDIT_TYPE);
+                    int id = io.readInt(EDIT_ID);
+                    edit(userSelectedType, id);
                     break;
                 case "insert":
-                    type = io.readLine("What do you want to insert? (book, blogpost, podcast, video): ");
+                    userSelectedType = io.readLine(INSERT_TYPE);
 
-                    boolean valid = false;
-                    for (String s : TypeField.POSSIBLE_TYPES) {
-                        valid = valid || type.equals(s);
-                    }
-                    if (!valid) {
-                        io.print(type + " is not a valid type to insert.");
+                    if (!isValid(userSelectedType)) {
+                        io.warn(String.format(NOT_VALID_INSERT, userSelectedType));
                         break;
                     }
-                    Tip t = Tip.tipFromType(type);
-                    String s;
-                    boolean loop;
-                    for (String field : t.getFieldNames()) {
+                    Tip selectedTipType = Tip.tipFromType(userSelectedType);
+                    for (String field : selectedTipType.getFieldNames()) {
                         if (field.equals("id")) {
                             continue;
                         }
-                        loop = true;
-                        while (loop) {
-                            s = io.readLine(t.getField(field).toString() + "?");
-                            if (!t.getField(field).setContent(s)) {
-                                io.print("'" + s + "' is not a valid " + field + ".");
-                            } else {
-                                loop = false;
-                            }
-                        }
+                        insertColumn(selectedTipType, field);
                     }
-                    if (daoService.insert(t)) {
-                        io.print("Successfully added a " + type + "!");
+                    if (daoService.insert(selectedTipType)) {
+                        io.success(String.format(SUCCESSFUL_INSERT, userSelectedType));
                     } else {
-                        io.print("There was a problem with adding the " + type + ".");
+                        io.warn(String.format(ERROR_INSERTING, userSelectedType));
                     }
                     break;
                 case "delete-type":
-                    type = io.readLine("What type of tips do you want to delete? Command deletes all of them. (book, blogpost, podcast, video or all): ");
+                    io.prompt(DELETE_TYPE);
+                    userSelectedType = io.readLine(DELETE_WARN);
 
-                    if (type.equals("all")) {
+                    if (userSelectedType.equals("all")) {
                         deleteAll();
                         break;
                     }
-                    valid = false;
-                    for (String string : TypeField.POSSIBLE_TYPES) {
-                        valid = valid || type.equals(string);
-                    }
-                    if (!valid) {
-                        io.print(type + " is not a valid type to delete.");
+                    if (!isValid(userSelectedType)) {
+                        io.warn(String.format(DELETE_INVALID_TYPE, userSelectedType));
                         break;
                     }
-                    deleteType(type);
+                    deleteType(userSelectedType);
                     break;
                 case "delete-all":
                     deleteAll();
                     break;
                 case "delete-one":
-                    type = io.readLine("What type of tip do you want to delete? (book, blogpost, podcast or video): ");
-                    id = io.readInt("What id-number you want to delete?");
-                    deleteById(type, id);
+                    userSelectedType = io.readLine(DELETE_ONE);
+                    id = io.readInt(DELETE_ID);
+                    deleteById(userSelectedType, id);
                     break;
                 case "quit":
                     quit = true;
                     break;
                 default:
-                    io.print("Enter a proper command (insert, find-type, find-all, delete-type, delete-all, quit)");
+                    io.warn(PROPER_COMMAND_WARNING);
             }
 
+        }
+    }
+
+    private boolean isValid(String userSelectedType) {
+        boolean valid = false;
+        for (String tipType : TypeField.POSSIBLE_TYPES) {
+            valid = valid || userSelectedType.equals(tipType);
+        }
+        return valid;
+    }
+
+    private String insertColumn(Tip selectedTipType, String field) {
+        String insertedColumnValue = io.readLine(String.format(INSERT_COLUMN, selectedTipType.getField(field).toString()));
+        if (!selectedTipType.getField(field).setContent(insertedColumnValue)) {
+            io.prompt(String.format(INVALID_COLUMN, insertedColumnValue, field));
+            return insertColumn(selectedTipType, field);
+        } else {
+            return insertedColumnValue;
         }
     }
 
@@ -142,22 +149,22 @@ public class App {
         for (String s : TypeField.POSSIBLE_TYPES) {
             deleteType(s);
         }
-        io.print("Everything deleted!");
+        io.success(DELETE_ALL_SUCCESS);
     }
 
     private void deleteType(String type) {
         if (daoService.deleteAll(type)) {
-            io.print("Deleting all " + type + "s successful!");
+            io.success(String.format(DELETE_TYPE_SUCCESS, type));
         } else {
-            io.print("There was a problem with deleting all " + type + "s.");
+            io.warn(String.format(DELETE_TYPE_FAIL, type));
         }
     }
 
     private void deleteById(String type, int id) {
         if (daoService.deleteById(type, id)) {
-            io.print("Deleting " + type + " with id-number " + id + " was succesfull");
+            io.success(String.format(DELETE_ID_SUCCESS, type, id));
         } else {
-            io.print("There was a problem with deleting.");
+            io.warn(DELETE_ID_FAIL);
         }
     }
 
@@ -165,74 +172,76 @@ public class App {
         for (String s : TypeField.POSSIBLE_TYPES) {
             findType(s);
         }
-        io.print("Everything found.");
+        io.success("Everything found");
     }
 
     private void findType(String type) {
         boolean legitInput = false;
-        for (String s : TypeField.POSSIBLE_TYPES) {
-            legitInput = s.equalsIgnoreCase(s);
+        for (String allTypes : TypeField.POSSIBLE_TYPES) {
+            legitInput = allTypes.equalsIgnoreCase(type);
             if (legitInput) {
                 break;
             }
         }
         if (!legitInput) {
-            io.print("'" + type + "' is not a valid type.");
+            io.prompt(String.format(INVALID_COLUMN, type, "type"));
             return;
         }
         List<Tip> allFromType = daoService.findAll(type);
-        io.print(type.substring(0, 1).toUpperCase() + type.substring(1) + "s:");
-        io.print("-----------------------------------");
+        if (allFromType.isEmpty()) {
+
+        }
+        io.prompt(type.substring(0, 1).toUpperCase() + type.substring(1) + "s:");
+        io.prompt("-----------------------------------");
         int tipsAdded = 0;
         for (Tip tip : allFromType) {
-            io.print(tip.toString());
+            io.prompt(tip.toString());
             tipsAdded++;
             if (tipsAdded < allFromType.size()) {
                 System.out.println();
             }
         }
-        io.print("-----------------------------------");
-        io.print("Every " + type + " found.");
-        System.out.println();
+        io.prompt("-----------------------------------");
+        io.prompt(String.format(FOUND_TYPE, type));
     }
 
     private void printListOfTips(List<Tip> list) {
         for (Tip tip : list) {
-            io.print(tip.toString());
+            io.prompt(tip.toString() + "\n");
         }
     }
 
     private void edit(String type, int id) {
         if (daoService.findById(type, id) == null) {
-            io.print("There was a problem in founding the tip for editing.");
+            io.warn(EDIT_FIND_ERROR);
         } else {
             Tip tip = daoService.findById(type, id);
-            io.print(tip.toString());
-            String editing = io.readLine("What do you want to edit?").toLowerCase();
-            boolean e = true;
-            for (String s : tip.getFieldNames()) {
-                if (s.equals(editing)) {
-                    e = false;
+            io.prompt(tip.toString());
+            String columnToEdit = io.readLine(EDIT_FIELD).toLowerCase();
+            boolean invalidFieldName = true;
+            for (String fieldName : tip.getFieldNames()) {
+                if (fieldName.equals(columnToEdit)) {
+                    invalidFieldName = false;
                     break;
                 }
             }
-            if (e) {
-                io.print("Given '" + editing + "' is not a valid field name.");
-            } else if (editing.equals("id")) {
-                io.print("You can't edit id!");
+            if (invalidFieldName) {
+                io.prompt(String.format(INVALID_COLUMN, columnToEdit, "field name"));
+            } else if (columnToEdit.equals("id")) {
+                io.warn(EDIT_ID_NOT_POSSIBLE);
             } else {
-                String newS = io.readLine("Give a new content for the " + editing + ".");
-                if (tip.getField(editing).isValidContent(newS)) {
-                    if (daoService.editById(type, id, editing, newS)) {
-                        tip.getField(editing).setContent(newS);
-                        io.print(tip.toString());
-                        io.print("Editing was successful!");
+                String newValue = io.readLine(String.format(EDIT_NEW_VALUE, columnToEdit));
+                if (tip.getField(columnToEdit).isValidContent(newValue)) {
+                    if (daoService.editById(type, id, columnToEdit, newValue)) {
+                        tip.getField(columnToEdit).setContent(newValue);
+                        io.prompt(tip.toString());
+                        io.success(EDIT_SUCCESS);
                     } else {
-                        io.print(tip.toString());
-                        io.print("Editing was not successful");
+                        io.prompt(tip.toString());
+                        io.warn(EDIT_ERROR);
                     }
                 } else {
-                    io.print("Given '"+newS+"' is not a valid content for "+editing+".");
+                    io.warn(String.format(INVALID_COLUMN, newValue, columnToEdit));
                 }
             }
         }

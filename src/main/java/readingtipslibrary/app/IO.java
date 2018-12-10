@@ -13,7 +13,9 @@ import readingtipslibrary.dao.Database;
  */
 public interface IO {
 
-    void print(String toPrint);
+    void warn(String toPrint);
+    void prompt(String toPrint);
+    void success(String toPrint);
 
     String readLine(String line);
     int readInt(String line);
