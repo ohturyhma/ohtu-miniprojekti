@@ -117,6 +117,10 @@ public class App {
                     id = io.readInt(DELETE_ID);
                     deleteById(userSelectedType, id);
                     break;
+                case "print-random-tip":
+                    selectRandomTip();
+                                       
+                    break;
                 case "quit":
                     quit = true;
                     break;
@@ -124,6 +128,15 @@ public class App {
                     io.warn(PROPER_COMMAND_WARNING);
             }
 
+        }
+    }
+    
+    private void selectRandomTip() {
+        Tip tip = daoService.selectRandomTip();
+        if (tip != null) {
+            io.prompt(tip.toString());
+        } else {
+            io.prompt("No tips were found.");
         }
     }
 

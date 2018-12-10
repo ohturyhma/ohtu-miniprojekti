@@ -11,10 +11,10 @@ package readingtipslibrary.app;
  */
 public class Constants {
 
-    public static final String COMMANDS_LIST = "Commands: \n-insert\n-edit\n-find-by-name\n-find-type\n-find-all\n-delete-type\n-delete-all\n-delete-one\n-quit";
+    public static final String COMMANDS_LIST = "Commands: \n-insert\n-edit\n-find-by-name\n-find-type\n-find-all\n-delete-type\n-delete-all\n-delete-one\nprint-random-tip\n-quit";
     public static final String ENTER_COMMAND = "Enter command: ";
     public static final String FIND_TYPE = "What do you want to find? (book, blogpost, podcast, video, all)";
-    public static final String SEARCH_NAME = "Search for name: ";
+    public static final String SEARCH_NAME = "Enter name (or part of a name): ";
     public static final String FOUND_ENTRIES = "Found %s entries";
     public static final String FOUND_TYPE = "Every %s found";
     public static final String FOUND_NOTHING = "Found no entries for %s";
