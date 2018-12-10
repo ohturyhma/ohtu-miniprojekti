@@ -7,7 +7,11 @@ package readingtipslibrary.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import readingtipslibrary.domain.Tip;
 
 /**
@@ -20,6 +24,24 @@ public class DaoService {
 
     public DaoService(Database database) {
         this.tipDao = new TipDao(database);
+    }
+
+    public Tip selectRandomTip() {
+        List<String> orderToTryTables = returnTypesOfTablesInRandomOrder();
+        List<Tip> tips = new ArrayList<>();
+        
+        for (int i = 0; i < 4; i++) {
+            tips = findAll(orderToTryTables.get(i));
+            if (!tips.isEmpty()) {
+                break;
+            }
+        }
+
+        Random r = new Random();
+        int indeksi = r.nextInt(tips.size());
+
+        return tips.get(indeksi);
+
     }
 
     public List<Tip> findByName(String name, String type) {
@@ -85,14 +107,41 @@ public class DaoService {
         }
         return tip;
     }
-    
-    public boolean editById(String type, int id, String column, String newContent){
+
+    public boolean editById(String type, int id, String column, String newContent) {
         boolean r = false;
         try {
-            r=tipDao.editById(type, id, column, newContent);
+            r = tipDao.editById(type, id, column, newContent);
         } catch (SQLException e) {
             return false;
         }
         return r;
+    }
+
+    private List<String> returnTypesOfTablesInRandomOrder() {
+        List<Integer> digits = IntStream.range(1, 5).boxed().collect(Collectors.toList());
+        Collections.shuffle(digits);
+
+        List<String> order = new ArrayList<>();
+
+        for (int i = 0; i < 4; i++) {
+            int luku = digits.get(i);
+
+            switch (luku) {
+                case 1:
+                    order.add("book");
+                    break;
+                case 2:
+                    order.add("video");
+                    break;
+                case 3:
+                    order.add("podcast");
+                    break;
+                case 4:
+                    order.add("blogpost");
+                    break;
+            }
+        }
+        return order;
     }
 }

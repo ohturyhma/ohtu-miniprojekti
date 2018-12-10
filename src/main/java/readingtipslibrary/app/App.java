@@ -36,7 +36,7 @@ public class App {
 
         while (!quit) {
             System.out.println();
-            io.print("Commands: insert, edit, find-by-name, find-type, find-all, delete-type, delete-all, delete-one, quit");
+            io.print("Commands: insert, edit, find-by-name, find-type, find-all, delete-type, delete-all, delete-one, print-random-tip, quit");
             String command = io.readLine("Enter command: ");
 
             switch (command) {
@@ -51,7 +51,7 @@ public class App {
 
                 case "find-by-name":
 
-                    String name = io.readLine("Enter the name: (You can also search for 'Excalibur' by entering 'Exc'");
+                    String name = io.readLine("Enter the name: (Or a part of the name)");
 
                     List<Tip> list = new ArrayList<>();
                     for (String s : TypeField.POSSIBLE_TYPES) {
@@ -128,6 +128,10 @@ public class App {
                     id = io.readInt("What id-number you want to delete?");
                     deleteById(type, id);
                     break;
+                case "print-random-tip":
+                    selectRandomTip();
+                                       
+                    break;
                 case "quit":
                     quit = true;
                     break;
@@ -135,6 +139,15 @@ public class App {
                     io.print("Enter a proper command (insert, find-type, find-all, delete-type, delete-all, quit)");
             }
 
+        }
+    }
+    
+    private void selectRandomTip() {
+        Tip tip = daoService.selectRandomTip();
+        if (tip != null) {
+            io.print(tip.toString());
+        } else {
+            io.print("No tips were found.");
         }
     }
 
