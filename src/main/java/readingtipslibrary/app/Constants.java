@@ -11,7 +11,7 @@ package readingtipslibrary.app;
  */
 public class Constants {
 
-    public static final String COMMANDS_LIST = "Commands: \n-insert\n-edit\n-find-by-name\n-find-type\n-find-all\n-delete-type\n-delete-all\n-delete-one\nprint-random-tip\n-quit";
+    public static final String COMMANDS_LIST = "Commands: \n-insert\n-edit\n-find-by-name\n-find-type\n-find-all\n-delete-type\n-delete-all\n-delete-one\n-print-random-tip\n-quit";
     public static final String ENTER_COMMAND = "Enter command: ";
     public static final String FIND_TYPE = "What do you want to find? (book, blogpost, podcast, video, all)";
     public static final String SEARCH_NAME = "Enter name (or part of a name): ";
@@ -42,5 +42,5 @@ public class Constants {
     public static final String DELETE_TYPE_SUCCESS = "Deleting all %ss successful!";
     public static final String DELETE_TYPE_FAIL = "There was a problem with deleting all %ss.";
     public static final String DELETE_ID_SUCCESS = "Deleting %s with id %s was succesful!";
-    public static final String DELETE_ID_FAIL = "There was a problem with deleting %s";
+    public static final String DELETE_ID_FAIL = "An error occured during delete.";
 }

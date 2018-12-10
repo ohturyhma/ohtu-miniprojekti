@@ -72,7 +72,7 @@ public class App {
                     break;
                 case "edit":
                     String userSelectedType = io.readLine(EDIT_TYPE);
-                    int id = io.readInt(EDIT_ID);
+                    int id = io.readInt(String.format(EDIT_ID, userSelectedType));
                     edit(userSelectedType, id);
                     break;
                 case "insert":
@@ -96,8 +96,7 @@ public class App {
                     }
                     break;
                 case "delete-type":
-                    io.prompt(DELETE_TYPE);
-                    userSelectedType = io.readLine(DELETE_WARN);
+                    userSelectedType = io.readLine(DELETE_TYPE);
 
                     if (userSelectedType.equals("all")) {
                         deleteAll();
@@ -197,7 +196,7 @@ public class App {
             }
         }
         if (!legitInput) {
-            io.prompt(String.format(INVALID_COLUMN, type, "type"));
+            io.warn(String.format(INVALID_COLUMN, type, "type"));
             return;
         }
         List<Tip> allFromType = daoService.findAll(type);
@@ -239,7 +238,7 @@ public class App {
                 }
             }
             if (invalidFieldName) {
-                io.prompt(String.format(INVALID_COLUMN, columnToEdit, "field name"));
+                io.warn(String.format(INVALID_COLUMN, columnToEdit, "field name"));
             } else if (columnToEdit.equals("id")) {
                 io.warn(EDIT_ID_NOT_POSSIBLE);
             } else {

@@ -7,6 +7,7 @@ package readingtipslibrary.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -29,14 +30,14 @@ public class DaoService {
     public Tip selectRandomTip() {
         List<String> orderToTryTables = returnTypesOfTablesInRandomOrder();
         List<Tip> tips = new ArrayList<>();
-        
+
         for (int i = 0; i < 4; i++) {
             tips = findAll(orderToTryTables.get(i));
             if (!tips.isEmpty()) {
                 break;
             }
         }
-
+        if(tips.isEmpty()) return null;
         Random r = new Random();
         int indeksi = r.nextInt(tips.size());
 
@@ -119,29 +120,9 @@ public class DaoService {
     }
 
     private List<String> returnTypesOfTablesInRandomOrder() {
-        List<Integer> digits = IntStream.range(1, 5).boxed().collect(Collectors.toList());
-        Collections.shuffle(digits);
-
         List<String> order = new ArrayList<>();
-
-        for (int i = 0; i < 4; i++) {
-            int luku = digits.get(i);
-
-            switch (luku) {
-                case 1:
-                    order.add("book");
-                    break;
-                case 2:
-                    order.add("video");
-                    break;
-                case 3:
-                    order.add("podcast");
-                    break;
-                case 4:
-                    order.add("blogpost");
-                    break;
-            }
-        }
+        order.addAll(Arrays.asList("book", "video", "podcast", "blogpost"));
+        Collections.shuffle(order);
         return order;
     }
 }
