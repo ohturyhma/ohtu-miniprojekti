@@ -73,4 +73,14 @@ public class StubIO implements IO {
     public void success(String toPrint) {
         prints.add(toPrint);
     }
+
+    @Override
+    public void purpleText(String toPrint) {
+        prints.add(toPrint);
+    }
+
+    @Override
+    public void whiteText(String toPrint) {
+        prints.add(toPrint);
+    }
 }

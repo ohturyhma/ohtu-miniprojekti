@@ -73,4 +73,13 @@ public class ConsoleIO implements IO {
         return 0;
     }
 
+    @Override
+    public void purpleText(String toPrint) {
+        System.out.println(PURPLE + toPrint + RESET);
+    }
+
+    @Override
+    public void whiteText(String toPrint) {
+        System.out.println(WHITE + toPrint + RESET);
+    }
 }

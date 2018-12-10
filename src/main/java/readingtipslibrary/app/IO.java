@@ -16,7 +16,8 @@ public interface IO {
     void warn(String toPrint);
     void prompt(String toPrint);
     void success(String toPrint);
-
+    void purpleText(String toPrint);
+    void whiteText(String toPrint);
     String readLine(String line);
     int readInt(String line);
     Database getDatabase();

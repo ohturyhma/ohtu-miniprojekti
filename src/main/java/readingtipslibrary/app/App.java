@@ -150,7 +150,7 @@ public class App {
     private String insertColumn(Tip selectedTipType, String field) {
         String insertedColumnValue = io.readLine(String.format(INSERT_COLUMN, selectedTipType.getField(field).toString()));
         if (!selectedTipType.getField(field).setContent(insertedColumnValue)) {
-            io.prompt(String.format(INVALID_COLUMN, insertedColumnValue, field));
+            io.warn(String.format(INVALID_COLUMN, insertedColumnValue, field));
             return insertColumn(selectedTipType, field);
         } else {
             return insertedColumnValue;
@@ -184,7 +184,6 @@ public class App {
         for (String s : TypeField.POSSIBLE_TYPES) {
             findType(s);
         }
-        io.success("Everything found");
     }
 
     private void findType(String type) {
@@ -203,18 +202,18 @@ public class App {
         if (allFromType.isEmpty()) {
 
         }
-        io.prompt(type.substring(0, 1).toUpperCase() + type.substring(1) + "s:");
-        io.prompt("-----------------------------------");
+        io.purpleText(type.substring(0, 1).toUpperCase() + type.substring(1) + "s:");
+        if(allFromType.isEmpty()) return;
+        io.whiteText("-----------------------------------");
         int tipsAdded = 0;
         for (Tip tip : allFromType) {
             io.prompt(tip.toString());
             tipsAdded++;
             if (tipsAdded < allFromType.size()) {
-                System.out.println();
+                System.out.println("\n");
             }
         }
-        io.prompt("-----------------------------------");
-        io.prompt(String.format(FOUND_TYPE, type));
+        io.whiteText("-----------------------------------");
     }
 
     private void printListOfTips(List<Tip> list) {

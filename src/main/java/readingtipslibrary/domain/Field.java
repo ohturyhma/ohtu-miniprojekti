@@ -13,16 +13,18 @@ public abstract class Field {
 
     protected String name;
     private String content;
+    public static final String RESET = "\u001B[0m";
+    public static final String CYAN = "\u001B[36m";
 
     @Override
     public String toString() {
-        return name.substring(0, 1).toUpperCase() + name.substring(1) + ": ";
+        return CYAN + name.substring(0, 1).toUpperCase() + name.substring(1) + ": " + RESET;
     }
 
-    public String nameContentPrint(){
+    public String nameContentPrint() {
         return toString() + getContent();
     }
-    
+
     public String getName() {
         return name;
     }
@@ -38,7 +40,7 @@ public abstract class Field {
         this.content = content;
         return true;
     }
-    
+
     public boolean isValidContent(String s) {
         return true;
     }
