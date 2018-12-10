@@ -55,7 +55,8 @@ jacocoTestReport {
                           '**/ConsoleIO**',
                           '**/Main**',
                           '**/IO**',
-                          '**/StunIO**'])
+                          '**/StubIO**',
+						  '**/Constants**'])
 
 
             })
