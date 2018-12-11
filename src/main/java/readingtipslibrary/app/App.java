@@ -60,7 +60,7 @@ public class App {
                         list.addAll(daoService.findByName(name, s));
                     }
                     if (list.isEmpty()) {
-                        io.prompt(FOUND_NOTHING);
+                        io.prompt(String.format(FOUND_NOTHING, name));
                     } else {
                         io.prompt(String.format(FOUND_ENTRIES, list.size()));
                         printListOfTips(list);
