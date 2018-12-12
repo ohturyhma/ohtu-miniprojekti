@@ -5,8 +5,6 @@
  */
 package readingtipslibrary.domain;
 
-import java.util.HashMap;
-
 /**
  * Class containing the data for a book
  *

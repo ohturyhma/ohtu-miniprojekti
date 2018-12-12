@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package readingtipslibrary.domain;
-
-import java.util.HashMap;
-
 /**
  * Class containing data for a podcast episode
  *

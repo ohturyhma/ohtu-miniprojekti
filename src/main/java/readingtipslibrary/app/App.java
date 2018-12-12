@@ -135,7 +135,7 @@ public class App {
         if (tip != null) {
             System.out.println("");
             io.purpleText(tip.getType().getContent());
-            io.whiteText("-----------------------------------");
+            io.whiteText(LINE_DIVIDER);
             io.prompt(tip.toString());
         } else {
             io.prompt("No tips were found.");
@@ -207,7 +207,7 @@ public class App {
         }
         io.purpleText(type.substring(0, 1).toUpperCase() + type.substring(1) + "s:");
         if(allFromType.isEmpty()) return;
-        io.whiteText("-----------------------------------");
+        io.whiteText(LINE_DIVIDER);
         int tipsAdded = 0;
         for (Tip tip : allFromType) {
             io.prompt(tip.toString());
@@ -216,7 +216,7 @@ public class App {
                 System.out.println("\n");
             }
         }
-        io.whiteText("-----------------------------------");
+        io.whiteText(LINE_DIVIDER);
     }
 
     private void printListOfTips(List<Tip> list) {

@@ -5,7 +5,6 @@
  */
 package readingtipslibrary.domain;
 
-import java.util.HashMap;
 
 /**
  * Class containing video for a podcast episode

@@ -48,10 +48,12 @@ public abstract class Tip {
     public String toString(){
         String s = "";
         int fieldsAdded = 0;
-        for(Field f : fields.values()){
+        Field f;
+        for(String fieldName : fieldNames){ // HashMap doesn't preserve the order, hence the ArrayList is used for iterating
+            f = fields.get(fieldName);
             s += f.nameContentPrint();
             fieldsAdded++;
-            if (fieldsAdded < fields.size())
+            if (fieldsAdded < fieldNames.size())
                 s += "\n"; 
         }
         return s;
