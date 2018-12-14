@@ -70,19 +70,6 @@ public class DaoTest {
         //
     }
 
-    @Test
-    public void bookDaoTest() throws SQLException {
-        //
-    }
-
-    @Test
-    public void podcastDaoTest() throws SQLException {
-        //
-    }
-
-    @Test
-    public void videoDaoTest() throws SQLException {
-        //
-    }
+    
 
 }
