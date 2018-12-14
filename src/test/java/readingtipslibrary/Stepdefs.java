@@ -78,6 +78,12 @@ public class Stepdefs {
     public void commandIsSelected(String command) {
         addParameters(command);
     }
+    
+    @Given("^test data is entered$")
+    public void testDataIsEntered() {
+        addParameters("insert", "book", "ExampleAuthor", "ExampleTitle", "12345", "ExampleDescription", "www.example.com");
+        
+    }
 
     @When("^type \"([^\"]*)\" is entered$")
     public void typeIsEntered(String type) {
@@ -121,7 +127,7 @@ public class Stepdefs {
         assertTrue(io.getPrints().contains(expected));
         emptyDatabase();
     }
-
+        
     private void runTestCase() throws Exception {
         input.add("quit");
         io = new StubIO(input);

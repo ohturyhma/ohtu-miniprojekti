@@ -25,54 +25,7 @@ public class TipDao {
     public TipDao(Database database) {
         this.database = database;
     }
-
-    public Tip selectRandomTip() throws SQLException {
-        Random r = new Random();
-        Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT Count(*) FROM ?");
-
-        String type = "";
-        
-        while (true) {
-            int luku = r.nextInt(4) + 1;
-            
-
-            switch (luku) {
-                case 1:
-                    type = "book";
-                    break;
-                case 2:
-                    type = "video";
-                    break;
-                case 3:
-                    type = "podcast";
-                    break;
-                case 4:
-                    type = "blogpost";
-                    break;
-            }
-            
-            String table = getTableName(type);
-            ResultSet rs = stmt.executeQuery();
-            
-            int size = rs.getInt(1);
-            
-            
-            break;
-        }
-        
-        String table = getTableName(type);
-            stmt.setObject(1, table);
-
-            ResultSet rs = stmt.executeQuery();
-            Tip tip = Tip.tipFromType(type);
-            for (String s : tip.getFieldNames()) {
-                tip.getField(s).setContent(rs.getString(s));
-            }
-
-        return null;
-    }
-
+    
     public List<Tip> findByName(String name, String type) throws SQLException {
         Tip t;
 

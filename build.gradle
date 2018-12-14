@@ -51,7 +51,6 @@ jacocoTestReport {
 	        exclude: ['readingtipslibrary.app/**',
 	                  '**/ReadingTips**',
 	                  '**/TestApplication**',
-                          '**/App**',
                           '**/ConsoleIO**',
                           '**/Main**',
                           '**/IO**',
