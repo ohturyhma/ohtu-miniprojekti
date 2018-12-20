@@ -38,7 +38,8 @@ App-luokan refaktorointi oli aikaa vievää, mutta ei teknisesti haastavaa.
 
 Backlogin ylläpidossa oli edelleen parantamisen varaa, vaikka loppua kohden se oli parempaa kuin alussa. 
 
-Tietokantatoteutus olisi ollut hyvä saada paremmaksi käyttämällä jotain valmista ratkaisua, esimerkiksi mainittua JPA-tyyppistä ratkaisua (esim. Hibernate). Se vähentäisi refaktoroinnin ja muun koodin ylläpidon tarvetta, lyhentäisi koodia huomattavasti ja tekisi siitä paljon selkeämpää kuin nykyinen ratkaisu.
+Tietokantatoteutus olisi ollut hyvä saada paremmaksi käyttämällä jotain valmista ratkaisua, esimerkiksi mainittua JPA-tyyppistä ratkaisua (esim. Hibernate). Kyseinen ratkaisutapa vähentäisi refaktoroinnin ja muun koodin ylläpidon tarvetta, lyhentäisi koodia huomattavasti ja tekisi siitä paljon selkeämpää kuin nykyinen ratkaisu.
 
-Itselle uutta eli asioita mitä opin: gradle, cucumber, travis. Cucumber tuntui ajoittain turhalta, jos olisi isompi projekti missä integraatio ja yksikkötestit olisivat kattavia, Cucumber tuntuisi vain yhdeltä ylimääräiseltä kerrokselta joka tekisi saman asian kuin jo olemassaolevat
-testit.
+## Loppusanat
+
+Ryhmälle uusia teknisiä asioita olivat: gradle, cucumber ja travis. Cucumber tuntui ajoittain turhalta, koska jos olisi tätä isompi projekti, missä integraatio- ja yksikkötestit olisivat kattavia, niin Cucumber tuntui olevan vain yksi ylimääräinen kerros, joka tekee saman asian kuin jo olemassa olevat testit.
