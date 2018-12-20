@@ -13,7 +13,7 @@
 
 [SPRINT 4 logi](https://docs.google.com/spreadsheets/d/1HErjSsQnRIdeJig6_m6VVYU6QJPHm2j8OfY310DhqNg/edit#gid=10)
 
-[Raportti] (https://github.com/ohturyhma/ohtu-miniprojekti/blob/master/raportti.md)
+[Raportti](https://github.com/ohturyhma/ohtu-miniprojekti/blob/master/raportti.md)
 
 
 Definition of done user storylle:
