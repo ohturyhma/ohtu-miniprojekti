@@ -4,7 +4,7 @@ Miniprojektin toteutukseen osallistuivat Susanna Rajamäki, Roope Niemi, Vertti 
 
 ## 1. sprintti
 
-Alussa hankalinta oli selvittää käytetyt tekniikat tiimin kesken. Pohdintaa oli paljon mm. tietokantatoteutuksen ympärillä. JPA-tyyppisen rajapinnan käyttäminen tietokantatoteutuksena olisi ollut ideaali, mutta rajoitetun työajan takia ei jäänyt aikaa sen selvittämiseksi, että miten sen olisi saanut konfiguroitua toimivalla tavalla. Tämä olisi ollut hyvä saada toimimaan sillä DAO-toteutuksen, jota ryhmä päätyi käyttämään, refaktorointi osoittautui myöhemmin ajoittain hankalaksi. Lisäksi gradle oli tiimille uusi buildaustyökalu, jonka käytössä tuli pieniä virheitä alussa, joiden korjaaminen jäi seuraavaan viikoon. Jacocon kanssa oli rivikattavuuden kanssa näkyvyysongelmia, jotka korjattiin seuraavan sprintin alussa.
+Alussa hankalinta oli selvittää käytetyt tekniikat tiimin kesken. Pohdintaa oli paljon mm. tietokantatoteutuksen ympärillä. Emme oikeastaan älynneet tehdä arkkitehtuurisuunnittelua kunnolla, ja arkkitehtuuri lähti käytännössä vain rakentumaan kunkin työpanoksen muota. Tietokantatoteutuksena JPA-tyyppisen rajapinnan käyttäminen olisi ollut ideaali, mutta rajoitetun työajan takia ei jäänyt aikaa sen selvittämiseksi, että miten sen olisi saanut konfiguroitua toimivalla tavalla. Tämä olisi ollut hyvä saada toimimaan sillä DAO-toteutuksen, jota ryhmä päätyi käyttämään, refaktorointi osoittautui myöhemmin ajoittain hankalaksi. Lisäksi gradle oli tiimille uusi buildaustyökalu, jonka käytössä tuli pieniä virheitä alussa, joiden korjaaminen jäi seuraavaan viikoon. Jacocon kanssa oli rivikattavuuden kanssa näkyvyysongelmia, jotka korjattiin seuraavan sprintin alussa.
 
 Projektityöskentelyssä backlogin käyttö oli uutta, joten alussa ei onnistuttu pilkkomaan user storyja oikealla tavalla tarpeeksi pieniksi teknisiksi taskeiksi. Toisena projektityöskentelyn haasteena oli ymmärtää minkä verran dokumentaatioon ja suunnitteluun kuuluu varata resursseja.
 
@@ -26,13 +26,15 @@ Projektityöskentely parani yleisesti ottaen entisestään, mutta yksi tiimiläi
 Teknisinä haasteina oli Cucumberin muokkaaminen geneerisemmäksi ja tekstikäyttöliittymän mukaiseksi. Tässä vaiheessa rupesi tulla selväksi, että tekstikäyttöliittymä ja Cucumber-testit olisi hyvä suunnitella jo alussa tiettyyn pisteeseen asti. Käyttöliittymän muokkaaminen kun saattoi aiheuttaa useamman Cucumber-testin hajoamisen. Lisäksi yksi haaste oli, että joissain Cucumber testeissä oletettiin, että tietokannassa on jotain tavaraa jo valmiiksi, jotta olisi voitu testata hyväksyttyjä tietokantahakuja ja niiden tulostusta. Tähän piti kehittää muutaman apumetodin avulla keino, jolla jo Given-vaiheessa tietokantaan luodaan dataa, jotta When- ja Then-vaiheessa voidaan testata onnistunutta
 hakua. Lisäksi piti keksiä jokin keino, jossa jokaisen testin jälkeen tietokanta tyhjennettäisiin. Tämän olisi ilmeisesti voinut tehdä jotenkin annotaatioilla, mutta ei ollut aikaa perehtyä keinoihin. Ratkaisuksi päädyttiin kovakoodaamaan tietokannan tyhjentämisen ja sinne lisäämisen ennen hakua, jotta viikkotyöaikoija ei ylitettäisi.
 
+Lisäksi kolmannen sprintin aikana päädyimme tekemään geneerisemmän vinkkiluokan refaktoroinnin superluokan avulla, joka pienensi koodiamme huomattavasti.
+
 Oikeiden URL-tunnisteiden hyväksymiseksi päädyttiin tekemään oma pattern match, koska se oli nopeampaa kuin tarpeeksi hyvän valmiin ratkaisun etsiminen.
 
 ## 4. sprintti
 
 Projektityöskentely parantui sprinttien edetessä. Alussa oli aikamoista hakuammuntaa, mutta se parani viikko viikolta.
 
-App-luokan refaktorointi oli aikaa vievää, mutta ei teknisesti haastavaa.
+App-luokan refaktorointi oli aikaa vievää, mutta ei teknisesti haastavaa. Lähdimme toteuttamaan vielä switch-case rakenteen muuttamista command pohjaiseksi, mutta emme saaneet tätä valmiiksi.
 
 Backlogin ylläpidossa oli edelleen parantamisen varaa, vaikka loppua kohden se oli parempaa kuin alussa. 
 
